@@ -1,0 +1,542 @@
+/* Categories Grid */
+.vr-categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 1.5rem;
+}
+
+.vr-categories-loading {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    gap: 1rem;
+    color: var(--vr-text-muted);
+}
+
+/* Category Card */
+.vr-category-card {
+    background: var(--vr-surface);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.vr-category-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.vr-category-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.vr-category-card__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--vr-text-primary);
+    margin: 0;
+}
+
+.vr-category-card__actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.vr-category-card__btn {
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    color: var(--vr-text-muted);
+    cursor: pointer;
+    transition: color 0.2s ease;
+    border-radius: var(--vr-border-radius-sm);
+}
+
+.vr-category-card__btn:hover {
+    color: var(--vr-primary);
+    background: var(--vr-primary-light);
+}
+
+.vr-category-card__btn--delete:hover {
+    color: var(--vr-error);
+    background: var(--vr-error-light);
+}
+
+.vr-category-card__icons {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+    padding: 1rem;
+    background: var(--vr-surface-variant);
+    border-radius: 8px;
+}
+
+.vr-category-card__icons img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+.vr-category-card__amenities {
+    margin-top: 1rem;
+}
+
+.vr-category-card__amenities h4 {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--vr-text-secondary);
+    margin: 0 0 0.5rem 0;
+}
+
+.vr-category-card__amenities ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.vr-category-card__amenities li {
+    font-size: 0.875rem;
+    color: var(--vr-text-secondary);
+    padding: 0.25rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.vr-category-card__amenities li::before {
+    content: "•";
+    color: var(--vr-primary);
+}
+
+/* Modal Specific Styles */
+.vr-amenities-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.vr-amenity-input {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.vr-amenity-remove {
+    color: var(--vr-error);
+    padding: 0.5rem;
+    transition: background-color 0.2s ease;
+}
+
+.vr-amenity-remove:hover {
+    background-color: var(--vr-error-light);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .vr-categories-grid {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+        gap: 1rem;
+    }
+    
+    .vr-category-card {
+        padding: 1rem;
+    }
+}
+
+.vr-categories {
+    padding: 2rem;
+}
+
+.vr-categories__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.vr-categories__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--vr-text-primary);
+}
+
+.vr-categories-grid {
+    display: grid;
+    grid-template-columns: auto;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+/* Modal Styles */
+.vr-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.vr-modal__content {
+    background: var(--vr-surface);
+    border-radius: 12px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.vr-modal__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.vr-modal__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--vr-text-primary);
+    margin: 0;
+}
+
+.vr-modal__close {
+    background: none;
+    border: none;
+    color: var(--vr-text-secondary);
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: color 0.2s ease;
+}
+
+.vr-modal__close:hover {
+    color: var(--vr-text-primary);
+}
+
+/* Form Styles */
+.vr-form-group {
+    margin-bottom: 1.5rem;
+}
+
+.vr-form-group label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--vr-text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.vr-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--vr-border);
+    border-radius: 8px;
+    background: var(--vr-surface);
+    color: var(--vr-text-primary);
+    font-size: 0.875rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.vr-input:focus {
+    border-color: var(--vr-primary);
+    box-shadow: 0 0 0 2px var(--vr-primary-alpha);
+    outline: none;
+}
+
+.vr-amenity-input {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Loading and Error States */
+.vr-loading,
+.vr-error,
+.vr-empty {
+    text-align: center;
+    padding: 2rem;
+    color: var(--vr-text-secondary);
+    background: var(--vr-surface);
+    border-radius: 12px;
+    margin: 1rem 0;
+}
+/* Categories Table */
+.vr-categories-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+    background: var(--vr-surface);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.vr-categories-table th,
+.vr-categories-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--vr-border);
+}
+
+.vr-categories-table th {
+    background: var(--vr-surface-variant);
+    font-weight: 600;
+    color: var(--vr-text-primary);
+}
+
+.vr-categories-table tr:hover {
+    background: var(--vr-surface-hover);
+}
+
+/* Responsive Table */
+@media (max-width: 768px) {
+    .vr-categories-table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .vr-categories-table thead,
+    .vr-categories-table tbody,
+    .vr-categories-table th,
+    .vr-categories-table td,
+    .vr-categories-table tr {
+        display: block;
+    }
+
+    .vr-categories-table thead {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .vr-categories-table tr {
+        border-bottom: 1px solid var(--vr-border);
+        padding: 1rem;
+    }
+
+    .vr-categories-table td {
+        border: none;
+        position: relative;
+        padding-left: 50%;
+        text-align: right;
+    }
+
+    .vr-categories-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        font-weight: 600;
+        color: var(--vr-text-primary);
+        text-align: left;
+    }
+}
+.vr-loading::before {
+    content: "";
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--vr-primary);
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* RTL Support */
+[dir="rtl"] .vr-category-card__amenities li::before {
+    margin-left: 0.5rem;
+    margin-right: 0;
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .vr-category-card {
+        background: var(--vr-surface-dark);
+    }
+
+    .vr-category-card__icons {
+        background: var(--vr-surface-variant-dark);
+    }
+} 
+
+/* General Form Styles */
+.vr-form {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.vr-form-group {
+    margin-bottom: 20px;
+}
+
+.vr-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.vr-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.vr-input:focus {
+    border-color: #056d3e;
+    outline: none;
+}
+
+.vr-icon-preview {
+    margin-top: 10px;
+}
+
+.vr-icon-preview img {
+    max-width: 50px;
+    max-height: 50px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+.vr-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.vr-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.vr-btn--outline {
+    background-color: transparent;
+    border: 1px solid #ddd;
+    color: #333;
+}
+
+.vr-btn--outline:hover {
+    background-color: #f8f9fa;
+}
+
+.vr-btn--primary {
+    background-color: #056d3e;
+    color: #fff;
+}
+
+.vr-btn--primary:hover {
+    background-color: #05512e;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .vr-form {
+        padding: 15px;
+    }
+
+    .vr-form-group {
+        margin-bottom: 15px;
+    }
+
+    .vr-input {
+        padding: 8px;
+        font-size: 13px;
+    }
+
+    .vr-btn {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .vr-form {
+        padding: 10px;
+    }
+
+    .vr-form-actions {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .vr-btn {
+        width: 100%;
+        padding: 10px;
+    }
+}
+.vr-icon-preview img {
+    max-width: 50px;
+    max-height: 50px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+}
+
+.vr-amenity-input-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.vr-amenity-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.vr-amenity-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 8px;
+}
+
+.vr-amenity-item span {
+    font-size: 14px;
+    color: #333;
+}
+
+.vr-btn--icon {
+    padding: 4px 8px;
+    font-size: 12px;
+}

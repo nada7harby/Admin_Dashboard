@@ -1,0 +1,446 @@
+/* Listings Page Styles */
+
+/* Filters Section */
+.vr-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--vr-spacing-md);
+    margin-bottom: var(--vr-spacing-lg);
+    padding: var(--vr-spacing-md);
+    background: var(--vr-gray-50);
+    border-radius: var(--vr-radius-lg);
+}
+
+.vr-filter-group {
+    flex: 1;
+    min-width: 200px;
+}
+/* Modal Styling */
+.vr-modal__container {
+    max-width: 600px;
+    width: 90%;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.vr-modal__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.vr-modal__title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+}
+
+.vr-modal__close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #666;
+}
+
+.vr-modal__close:hover {
+    color: #333;
+}
+
+/* Listing Details Styling */
+.listing-details {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.listing-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.listing-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: #333;
+}
+
+.listing-status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.listing-status.active {
+    background: #e3fcef;
+    color: #2ecc71;
+}
+
+.listing-status.inactive {
+    background: #ffe3e3;
+    color: #e74c3c;
+}
+
+.listing-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.info-label {
+    font-size: 14px;
+    color: #666;
+}
+
+.info-value {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+}
+
+.listing-description h3,
+.listing-opening-times h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.listing-description p {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+}
+
+.listing-opening-times ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.listing-opening-times li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.listing-opening-times li:last-child {
+    border-bottom: none;
+}
+
+.listing-opening-times .day {
+    font-size: 14px;
+    color: #666;
+}
+
+.listing-opening-times .time {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+.vr-date-range {
+    display: flex;
+    align-items: center;
+    gap: var(--vr-spacing-sm);
+}
+
+.vr-date-range span {
+    color: var(--vr-gray-500);
+    font-size: var(--vr-text-sm);
+}
+
+/* Listings Table Styles */
+.vr-table td {
+    vertical-align: middle;
+}
+
+.vr-listing-info {
+    display: flex;
+    align-items: center;
+    gap: var(--vr-spacing-md);
+}
+
+.vr-listing-image {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--vr-radius-md);
+    object-fit: cover;
+}
+
+.vr-listing-details {
+    min-width: 0;
+}
+
+.vr-listing-title {
+    font-weight: var(--vr-font-medium);
+    color: var(--vr-gray-900);
+    margin: 0 0 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.vr-listing-id {
+    font-size: var(--vr-text-xs);
+    color: var(--vr-gray-500);
+}
+
+/* Status Badge Colors */
+.vr-badge--active {
+    background: var(--vr-success-light);
+    color: var(--vr-success-dark);
+}
+
+.vr-badge--pending {
+    background: var(--vr-warning-light);
+    color: var(--vr-warning-dark);
+}
+
+.vr-badge--inactive {
+    background: var(--vr-gray-200);
+    color: var(--vr-gray-700);
+}
+
+/* Actions Column */
+.vr-listing-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--vr-spacing-sm);
+}
+
+/* Image Upload */
+.vr-image-upload {
+    border: 2px dashed var(--vr-gray-200);
+    border-radius: var(--vr-radius-lg);
+    padding: var(--vr-spacing-md);
+    text-align: center;
+    transition: border-color var(--vr-transition-fast);
+}
+
+.vr-image-upload:hover {
+    border-color: var(--vr-primary);
+}
+
+.vr-image-preview {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: var(--vr-spacing-sm);
+    margin-top: var(--vr-spacing-md);
+}
+
+.vr-image-preview-item {
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: var(--vr-radius-md);
+    overflow: hidden;
+}
+
+.vr-image-preview-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.vr-image-preview-item .vr-remove-image {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 24px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: var(--vr-radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--vr-error);
+    cursor: pointer;
+    transition: all var(--vr-transition-fast);
+}
+
+.vr-image-preview-item .vr-remove-image:hover {
+    background: var(--vr-error);
+    color: var(--vr-light);
+}
+
+/* Pagination */
+.vr-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--vr-spacing-md);
+    margin-top: var(--vr-spacing-lg);
+}
+
+.vr-pagination__info {
+    font-size: var(--vr-text-sm);
+    color: var(--vr-gray-600);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .vr-filters {
+        flex-direction: column;
+    }
+
+    .vr-filter-group {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .vr-listing-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--vr-spacing-sm);
+    }
+
+    .vr-listing-image {
+        width: 48px;
+        height: 48px;
+    }
+
+    .vr-listing-actions {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 640px) {
+    .vr-table th:nth-child(5),
+    .vr-table td:nth-child(5),
+    .vr-table th:nth-child(6),
+    .vr-table td:nth-child(6) {
+        display: none;
+    }
+} 
+
+/* Custom Modal Styling */
+.modal-content {
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #007bff; /* Primary color */
+    color: white;
+}
+
+.modal-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.modal-body .listing-details {
+    font-size: 1rem;
+    color: #333;
+}
+
+.modal-body .listing-header {
+    margin-bottom: 20px;
+}
+
+.modal-body .listing-title {
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: #007bff; /* Primary color */
+}
+
+.modal-body .listing-status {
+    font-size: 0.9rem;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #28a745; /* Green for active */
+    color: white;
+}
+
+.modal-body .listing-status.inactive {
+    background-color: #dc3545; /* Red for inactive */
+}
+
+.modal-body .listing-info {
+    margin-bottom: 20px;
+}
+
+.modal-body .info-item {
+    margin-bottom: 10px;
+}
+
+.modal-body .info-label {
+    font-weight: bold;
+    color: #555;
+}
+
+.modal-body .info-value {
+    color: #333;
+}
+
+.modal-body .listing-description {
+    margin-bottom: 20px;
+}
+
+.modal-body .listing-description h3 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #007bff; /* Primary color */
+    margin-bottom: 10px;
+}
+
+.modal-body .listing-description p {
+    color: #555;
+    line-height: 1.6;
+}
+
+.modal-body .listing-opening-times {
+    margin-bottom: 20px;
+}
+
+.modal-body .listing-opening-times h3 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #007bff; /* Primary color */
+    margin-bottom: 10px;
+}
+
+.modal-body .listing-opening-times ul {
+    list-style: none;
+    padding: 0;
+}
+
+.modal-body .listing-opening-times li {
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.modal-body .listing-opening-times .day {
+    font-weight: bold;
+    color: #333;
+}
+
+.modal-body .listing-opening-times .time {
+    color: #555;
+}
+
+.modal-footer {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: #f8f9fa; /* Light background */
+}

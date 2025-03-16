@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - Vyrlo</title>
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Admin Dashboard CSS -->
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/components/sidebar.css" />
+    <link rel="stylesheet" href="../css/components/header.css" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/listings.css" />
+  </head>
+  <body class="vr-admin">
+    <!-- Sidebar -->
+    <aside class="vr-sidebar">
+      <div class="vr-sidebar__header">
+        <img
+          src="/images/logo/logo.png"
+          alt="Vyrlo Admin"
+          class="vr-sidebar__logo"
+        />
+      </div>
+
+      <nav class="vr-sidebar__nav">
+        <a href="index.html" class="vr-sidebar__link active">
+          <i class="fas fa-chart-line"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="users.html" class="vr-sidebar__link">
+          <i class="fas fa-users"></i>
+          <span>Users</span>
+        </a>
+        <a href="listings.html" class="vr-sidebar__link">
+          <i class="fas fa-list"></i>
+          <span>Listings</span>
+        </a>
+        <a href="categories.html" class="vr-sidebar__link">
+          <i class="fas fa-tags"></i>
+          <span>Categories</span>
+        </a>
+        <a href="pricing.html" class="vr-sidebar__link">
+          <i class="fas fa-dollar-sign"></i>
+          <span>Pricing</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="vr-admin-main">
+      <!-- Header Placeholder -->
+      <header class="vr-admin-header"></header>
+
+      <!-- Dashboard Content -->
+      <div class="vr-admin-content">
+        <!-- Stats Cards -->
+        <div class="vr-stats-grid">
+          <div class="vr-stat-card">
+            <div class="vr-stat-card__icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <div class="vr-stat-card__content">
+              <h3 class="vr-stat-card__title">Total Users</h3>
+              <p class="vr-stat-card__value" id="totalUsers">0</p>
+              <span class="vr-stat-card__change">
+                <i class="fas fa-arrow-up"></i>
+                5% from last month
+              </span>
+            </div>
+          </div>
+          <div class="vr-stat-card">
+            <div class="vr-stat-card__icon">
+              <i class="fas fa-list"></i>
+            </div>
+            <div class="vr-stat-card__content">
+              <h3 class="vr-stat-card__title">Active Listings</h3>
+              <p class="vr-stat-card__value" id="activeListings">0</p>
+              <span class="vr-stat-card__change">
+                <i class="fas fa-arrow-up"></i>
+                12% from last month
+              </span>
+            </div>
+          </div>
+
+          <!-- <div class="vr-stat-card">
+                    <div class="vr-stat-card__icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="vr-stat-card__content">
+                        <h3 class="vr-stat-card__title">Reviews</h3>
+                        <p class="vr-stat-card__value" id="totalReviews">0</p>
+                        <span class="vr-stat-card__change">
+                            <i class="fas fa-arrow-up"></i>
+                            8% from last month
+                        </span>
+                    </div>
+                </div> -->
+
+          <!-- <div class="vr-stat-card">
+                    <div class="vr-stat-card__icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="vr-stat-card__content">
+                        <h3 class="vr-stat-card__title">Revenue</h3>
+                        <p class="vr-stat-card__value" id="totalRevenue">$0</p>
+                        <span class="vr-stat-card__change">
+                            <i class="fas fa-arrow-up"></i>
+                            15% from last month
+                        </span>
+                    </div>
+                </div> -->
+        </div>
+
+        <!-- Recent Activity -->
+        <!-- <div class="vr-admin-section">
+                <div class="vr-admin-section__header">
+                    <h2 class="vr-admin-section__title">Recent Activity</h2>
+                    <button class="vr-btn vr-btn--outline">View All</button>
+                </div>
+                
+                <div class="vr-table-container">
+                    <table class="vr-table">
+                        <thead>
+                            <tr>
+                                <th>Action</th>
+                                <th>User</th>
+                                <th>Details</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recentActivityTable">
+                            <tr>
+                                <td colspan="5" class="vr-table__empty">Loading activity...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div> -->
+
+        <!-- Latest Listings -->
+        <div class="vr-admin-section">
+          <div class="vr-admin-section__header">
+            <h2 class="vr-admin-section__title">Latest Listings</h2>
+            <button class="vr-btn vr-btn--outline">View All</button>
+          </div>
+
+          <div class="vr-table-container">
+            <table class="vr-table">
+              <thead>
+                <tr>
+                  <th>Listing</th>
+                  <th>Category</th>
+                  <th>IsPosted?</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="latestListingsTable">
+                <tr>
+                  <td colspan="5" class="vr-table__empty">
+                    Loading listings...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Admin Users Section -->
+        <div class="vr-admin-section">
+          <div class="vr-admin-section__header">
+            <h2 class="vr-admin-section__title">Admin Users</h2>
+            <button
+              class="vr-btn vr-btn--outline"
+              onclick="window.location.href='users.html'"
+            >
+              View All
+            </button>
+          </div>
+
+          <div class="vr-table-container">
+            <table class="vr-table">
+              <thead>
+                <tr>
+                  <th>Username</th>
+                  <th>Role</th>
+                  <th>Permissions</th>
+                  <th>Created At</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="adminUsersTable">
+                <tr>
+                  <td colspan="5" class="vr-table__empty">
+                    Loading admin users...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Toast Container -->
+    <div class="vr-toast-container" id="toastContainer"></div>
+    <!-- Bootstrap Modal -->
+    <!-- Bootstrap Modal -->
+    <div
+      class="modal fade"
+      id="adminModal"
+      tabindex="-1"
+      aria-labelledby="adminModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title" id="adminModalLabel">Admin Details</h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label"><strong>Username:</strong></label>
+              <p class="form-control-static" id="modalUsername">N/A</p>
+            </div>
+            <div class="mb-3">
+              <label class="form-label"><strong>Role:</strong></label>
+              <p class="form-control-static" id="modalRole">N/A</p>
+            </div>
+            <div class="mb-3">
+              <label class="form-label"><strong>Permissions:</strong></label>
+              <p class="form-control-static" id="modalPermissions">N/A</p>
+            </div>
+            <div class="mb-3">
+              <label class="form-label"><strong>Created At:</strong></label>
+              <p class="form-control-static" id="modalCreatedAt">N/A</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Core Services -->
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="../js/services/auth.service.js"></script>
+    <script src="../js/services/api.service.js"></script>
+    <script src="../js/services/toast.service.js"></script>
+
+    <!-- Components -->
+    <script src="../js/components/HeaderLoader.js"></script>
+
+    <!-- Page Scripts -->
+    <script src="../js/pages/dashboard.js"></script>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+admin/
+├── css/
+│   ├── components/
+│   │   ├── sidebar.css
+│   │   ├── header.css
+│   │   ├── tables.css
+│   │   ├── forms.css
+│   │   └── stats.css
+│   ├── pages/
+│   │   ├── dashboard.css
+│   │   ├── users.css
+│   │   ├── listings.css
+│   │   ├── categories.css
+│   │   └── pricing.css
+│   └── main.css
+├── js/
+│   ├── services/
+│   │   ├── auth.service.js
+│   │   ├── users.service.js
+│   │   ├── listings.service.js
+│   │   └── categories.service.js
+│   ├── components/
+│   │   ├── sidebar.js
+│   │   ├── header.js
+│   │   └── charts.js
+│   └── pages/
+│       ├── dashboard.js
+│       ├── users.js
+│       ├── listings.js
+│       ├── categories.js
+│       └── pricing.js
+└── pages/
+    ├── index.html
+    ├── users.html
+    ├── listings.html
+    ├── categories.html
+    └── pricing.html

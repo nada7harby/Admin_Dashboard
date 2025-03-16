@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Category - Vyrlo Admin</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Admin CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components/sidebar.css">
+    <link rel="stylesheet" href="../css/components/header.css">
+    <link rel="stylesheet" href="../css/pages/categories.css">
+    <link rel="stylesheet" href="../css/pages/view-category.css">
+   
+</head>
+<body class="vr-admin">
+    <!-- Sidebar -->
+    <aside class="vr-sidebar">
+        <div class="vr-sidebar__header">
+            <img src="/images/logo/logo.png" alt="Vyrlo Admin" class="vr-sidebar__logo">
+        </div>
+        
+        <nav class="vr-sidebar__nav">
+            <a href="index.html" class="vr-sidebar__link">
+                <i class="fas fa-chart-line"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="users.html" class="vr-sidebar__link">
+                <i class="fas fa-users"></i>
+                <span>Users</span>
+            </a>
+            <a href="listings.html" class="vr-sidebar__link">
+                <i class="fas fa-list"></i>
+                <span>Listings</span>
+            </a>
+            <a href="categories.html" class="vr-sidebar__link active">
+                <i class="fas fa-tags"></i>
+                <span>Categories</span>
+            </a>
+            <a href="pricing.html" class="vr-sidebar__link">
+                <i class="fas fa-dollar-sign"></i>
+                <span>Pricing</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="vr-admin-main">
+        <!-- Header -->
+        <header class="vr-admin-header">
+            <div class="vr-admin-header__left">
+                <button class="vr-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="vr-admin-header__title">Edit Category</h1>
+            </div>
+        </header>
+
+        <!-- Content -->
+     <!-- Content -->
+ <div class="vr-content">
+    <div class="vr-content__header">
+        <h1>Category Details</h1>
+        <button class="vr-btn vr-btn--secondary" onclick="window.location.href='categories.html'">
+            <i class="fas fa-arrow-left"></i> Back to Categories
+        </button>
+    </div>
+
+    <div class="vr-category-details-container">
+        <div class="vr-loading">Loading category details...</div>
+    </div>
+</div>
+    </main>
+
+    <!-- Toast Container -->
+    <div class="vr-toast-container" id="toastContainer"></div>
+
+    <!-- Core Services -->
+    <script src="../js/services/auth.service.js"></script>
+    <script src="../js/services/api.service.js"></script>
+    <script src="../js/services/toast.service.js"></script>
+    
+    <!-- Components -->
+    <script src="../js/components/HeaderLoader.js"></script>
+    
+    <!-- Page Script -->
+    <script src="../js/pages/view-category.js"></script>
+</body>
+</html> 
+

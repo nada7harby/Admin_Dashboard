@@ -1,0 +1,27 @@
+{
+  "name": "vyrlo-admin",
+  "version": "1.0.0",
+  "description": "Vyrlo Admin Dashboard",
+  "main": "index.js",
+  "scripts": {
+    "start": "live-server",
+    "build": "webpack --mode production",
+    "dev": "webpack serve --mode development"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.4.0",
+    "chart.js": "^4.4.1",
+    "jwt-decode": "^4.0.0",
+    "sweetalert2": "^11.10.5"
+  },
+  "devDependencies": {
+    "css-loader": "^6.8.1",
+    "html-webpack-plugin": "^5.5.0",
+    "live-server": "^1.2.2",
+    "mini-css-extract-plugin": "^2.7.6",
+    "style-loader": "^3.3.3",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  }
+}

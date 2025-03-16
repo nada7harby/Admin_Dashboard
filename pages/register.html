@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Registration - Vyrlo</title>
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Admin CSS -->
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/pages/login.css" />
+  </head>
+  <body class="vr-admin-login">
+    <div class="vr-login-container">
+      <div class="vr-login-card">
+        <div class="vr-login-card__header">
+          <img
+            src="/images/logo/logo.png"
+            alt="Vyrlo Admin"
+            class="vr-login-logo"
+          />
+          <h1 class="vr-login-title">Admin Registration</h1>
+          <p class="vr-login-subtitle">Create a new admin account</p>
+        </div>
+
+        <form id="registerForm" class="vr-login-form">
+          <div class="vr-form-group">
+            <label for="name" class="vr-label">Full Name</label>
+            <div class="vr-input-group">
+              <span class="vr-input-group__addon">
+                <i class="fas fa-user"></i>
+              </span>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="vr-input"
+                placeholder="Enter your full name"
+                required
+              />
+            </div>
+            <span class="vr-error-text" id="nameError"></span>
+          </div>
+
+          <div class="vr-form-group">
+            <label for="email" class="vr-label">Email Address</label>
+            <div class="vr-input-group">
+              <span class="vr-input-group__addon">
+                <i class="fas fa-envelope"></i>
+              </span>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="vr-input"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+            <span class="vr-error-text" id="emailError"></span>
+          </div>
+
+          <div class="vr-form-group">
+            <label for="password" class="vr-label">Password</label>
+            <div class="vr-input-group">
+              <span class="vr-input-group__addon">
+                <i class="fas fa-lock"></i>
+              </span>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="vr-input"
+                placeholder="Create a password"
+                required
+              />
+              <button
+                type="button"
+                class="vr-input-group__addon vr-password-toggle"
+              >
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+            <span class="vr-error-text" id="passwordError"></span>
+          </div>
+
+          <div class="vr-form-group">
+            <label for="confirmPassword" class="vr-label"
+              >Confirm Password</label
+            >
+            <div class="vr-input-group">
+              <span class="vr-input-group__addon">
+                <i class="fas fa-lock"></i>
+              </span>
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                class="vr-input"
+                placeholder="Confirm your password"
+                required
+              />
+              <button
+                type="button"
+                class="vr-input-group__addon vr-password-toggle"
+              >
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+            <span class="vr-error-text" id="confirmPasswordError"></span>
+          </div>
+
+          <div class="vr-form-group">
+            <label class="vr-checkbox">
+              <input type="checkbox" id="terms" required />
+              <span
+                >I agree to the
+                <a href="#" class="vr-text-primary">Terms of Service</a> and
+                <a href="#" class="vr-text-primary">Privacy Policy</a></span
+              >
+            </label>
+          </div>
+
+          <button
+            type="submit"
+            class="vr-btn vr-btn--primary vr-btn--full"
+            id="registerButton"
+          >
+            <span>Create Account</span>
+            <div class="vr-spinner vr-spinner--sm"></div>
+          </button>
+        </form>
+
+        <div class="vr-login-footer">
+          <p class="vr-text-sm vr-text-muted">
+            Already have an account?
+            <a href="login.html" class="vr-text-primary">Sign In</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="vr-toast-container" id="toastContainer"></div>
+
+    <!-- Core Services -->
+    <script src="../js/services/auth.service.js"></script>
+    <script src="../js/services/api.service.js"></script>
+    <script src="../js/services/toast.service.js"></script>
+
+    <!-- Page Script -->
+    <script src="../js/pages/register.js"></script>
+  </body>
+</html>

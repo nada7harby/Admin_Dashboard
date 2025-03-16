@@ -1,0 +1,134 @@
+/* Modal Styles */
+.vr-modal {
+    position: fixed;
+    inset: 0;
+    z-index: var(--vr-z-modal);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: var(--vr-spacing-md);
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--vr-transition-normal), visibility var(--vr-transition-normal);
+}
+
+.vr-modal.show {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+}
+
+.vr-modal__container {
+    background: var(--vr-light);
+    border-radius: var(--vr-radius-lg);
+    box-shadow: var(--vr-shadow-xl);
+    width: 100%;
+    max-width: 500px;
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+    transform: translateY(-20px);
+    transition: transform var(--vr-transition-normal);
+}
+
+.vr-modal.show .vr-modal__container {
+    transform: translateY(0);
+}
+
+.vr-modal__header {
+    padding: var(--vr-spacing-md);
+    border-bottom: 1px solid var(--vr-gray-200);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.vr-modal__title {
+    font-size: var(--vr-text-lg);
+    font-weight: var(--vr-font-semibold);
+    margin: 0;
+}
+
+.vr-modal__close {
+    font-size: var(--vr-text-xl);
+    color: var(--vr-gray-500);
+    cursor: pointer;
+    transition: color var(--vr-transition-fast);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--vr-radius-md);
+}
+
+.vr-modal__close:hover {
+    color: var(--vr-gray-700);
+    background: var(--vr-gray-100);
+}
+
+.vr-modal__content {
+    padding: var(--vr-spacing-md);
+}
+
+.vr-modal__footer {
+    padding: var(--vr-spacing-md);
+    border-top: 1px solid var(--vr-gray-200);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--vr-spacing-sm);
+}
+
+/* Modal Sizes */
+.vr-modal--sm .vr-modal__container {
+    max-width: 400px;
+}
+
+.vr-modal--lg .vr-modal__container {
+    max-width: 800px;
+}
+
+.vr-modal--xl .vr-modal__container {
+    max-width: 1140px;
+}
+
+/* Modal Animations */
+@keyframes modalShow {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes modalHide {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+    .vr-modal {
+        padding: var(--vr-spacing-sm);
+    }
+
+    .vr-modal__container {
+        max-height: calc(100vh - 1rem);
+    }
+
+    .vr-modal__header,
+    .vr-modal__content,
+    .vr-modal__footer {
+        padding: var(--vr-spacing-sm);
+    }
+} 

@@ -1,0 +1,166 @@
+<!-- Header Component -->
+<header class="vr-admin-header">
+    <div class="vr-admin-header__left">
+        <button class="vr-menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+        <h1 class="vr-admin-header__title" id="pageTitle">Dashboard</h1>
+    </div>
+    
+    <div class="vr-admin-header__right">
+        <div class="vr-admin-header__search" id="searchContainer">
+            <input type="text" placeholder="Search..." class="vr-input" id="searchInput">
+            <i class="fas fa-search"></i>
+        </div>
+        
+        <div class="vr-admin-header__user">
+            <img src="/images/defaults/default-avatar.png" alt="Admin" class="vr-admin-header__avatar" id="userAvatar">
+            <div class="vr-admin-header__user-info">
+                <span class="vr-admin-header__name" id="userName">Admin User</span>
+                <button class="vr-admin-header__logout" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>تسجيل الخروج</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Logout Confirmation Modal -->
+<div class="vr-modal" id="logoutModal">
+    <div class="vr-modal__container">
+        <div class="vr-modal__header">
+            <h3 class="vr-modal__title">تأكيد تسجيل الخروج</h3>
+            <button class="vr-modal__close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="vr-modal__content">
+            <p>هل أنت متأكد من أنك تريد تسجيل الخروج؟</p>
+        </div>
+        <div class="vr-modal__footer">
+            <button class="vr-btn vr-btn--outline" data-dismiss="modal">إلغاء</button>
+            <button class="vr-btn vr-btn--primary" id="confirmLogoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>تأكيد تسجيل الخروج</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+class Header {
+    constructor() {
+        this.init();
+        this.setupLogout();
+        this.loadUserInfo();
+        this.checkAuth();
+    }
+
+    init() {
+        // تحديث عنوان الصفحة بناءً على الصفحة الحالية
+        const currentPage = window.location.pathname.split('/').pop().split('.')[0];
+        const titles = {
+            'index': 'Dashboard',
+            'users': 'Users Management',
+            'listings': 'Listings Management',
+            'categories': 'Categories Management',
+            'pricing': 'Pricing Management'
+        };
+        
+        const pageTitle = document.getElementById('pageTitle');
+        if (pageTitle) {
+            pageTitle.textContent = titles[currentPage] || 'Dashboard';
+        }
+
+        // إخفاء شريط البحث في صفحات معينة
+        const searchContainer = document.getElementById('searchContainer');
+        if (searchContainer) {
+            const hideSearchPages = ['index', 'pricing'];
+            if (hideSearchPages.includes(currentPage)) {
+                searchContainer.style.display = 'none';
+            }
+        }
+    }
+
+    checkAuth() {
+        // التحقق من وجود توكن صالح
+        const token = localStorage.getItem('token');
+        if (!token) {
+            this.redirectToLogin();
+            return;
+        }
+    }
+
+    setupLogout() {
+    const logoutBtn = document.getElementById('logoutBtn');
+    const logoutModal = document.getElementById('logoutModal');
+    const confirmLogoutBtn = document.getElementById('confirmLogoutBtn');
+    const closeButtons = document.querySelectorAll('[data-dismiss="modal"]');
+
+    if (logoutBtn && logoutModal) {
+        logoutBtn.addEventListener('click', () => {
+            console.log('Logout button clicked'); // للتأكد من أن الحدث يعمل
+            logoutModal.style.display = 'flex';
+        });
+
+        closeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                console.log('Close button clicked'); // للتأكد من أن الحدث يعمل
+                logoutModal.style.display = 'none';
+            });
+        });
+
+        confirmLogoutBtn.addEventListener('click', () => {
+            console.log('Confirm logout button clicked'); // للتأكد من أن الحدث يعمل
+            this.logout();
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === logoutModal) {
+                console.log('Clicked outside modal'); // للتأكد من أن الحدث يعمل
+                logoutModal.style.display = 'none';
+            }
+        });
+    } else {
+        console.error('Logout button or modal not found');
+    }
+}
+
+    logout() {
+    try {
+        localStorage.clear(); // حذف جميع البيانات المخزنة
+        if (window.toastService) {
+            window.toastService.show('تم تسجيل الخروج بنجاح', 'success');
+        }
+        this.redirectToLogin();
+    } catch (error) {
+        console.error('Error during logout:', error);
+        if (window.toastService) {
+            window.toastService.show('حدث خطأ أثناء تسجيل الخروج', 'error');
+        }
+    }
+}
+
+    redirectToLogin() {
+        window.location.href = 'login.html';
+    }
+
+    loadUserInfo() {
+        // تحميل بيانات المستخدم من التخزين المحلي
+        const user = JSON.parse(localStorage.getItem('user') || '{}');
+        
+        const userName = document.getElementById('userName');
+        const userAvatar = document.getElementById('userAvatar');
+        
+        if (userName && user.name) {
+            userName.textContent = user.name;
+        }
+        
+        if (userAvatar && user.avatar) {
+            userAvatar.src = user.avatar;
+        }
+    }
+}
+
+// تهيئة المكون
+new Header();
+</script>

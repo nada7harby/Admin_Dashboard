@@ -1,0 +1,313 @@
+/* Pricing Page Styles */
+
+/* Pricing Grid */
+.vr-pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--vr-spacing-lg);
+    margin-bottom: var(--vr-spacing-xl);
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Pricing Card */
+.vr-pricing-card {
+    background: var(--vr-light);
+    border-radius: var(--vr-radius-lg);
+    box-shadow: var(--vr-shadow-lg);
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    border: 1px solid var(--vr-gray-200);
+}
+
+.vr-pricing-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--vr-shadow-xl);
+    border-color: var(--vr-primary);
+}
+
+.vr-pricing-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--vr-primary);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.vr-pricing-card:hover::before {
+    opacity: 1;
+}
+
+.vr-pricing-card__header {
+    padding: var(--vr-spacing-lg);
+    background: linear-gradient(135deg, var(--vr-gray-50), var(--vr-light));
+    text-align: center;
+    position: relative;
+    transition: background 0.3s ease;
+}
+
+.vr-pricing-card:hover .vr-pricing-card__header {
+    background: linear-gradient(135deg, var(--vr-primary-light), var(--vr-primary));
+}
+
+.vr-pricing-card:hover .vr-pricing-card__title,
+.vr-pricing-card:hover .vr-pricing-card__amount,
+.vr-pricing-card:hover .vr-pricing-card__period {
+    color: var(--vr-light);
+}
+
+.vr-pricing-card__title {
+    font-size: var(--vr-text-xl);
+    font-weight: var(--vr-font-bold);
+    color: var(--vr-gray-900);
+    margin: 0 0 var(--vr-spacing-sm);
+    transition: color 0.3s ease;
+}
+
+.vr-pricing-card__price {
+    margin-bottom: var(--vr-spacing-sm);
+    transition: transform 0.3s ease;
+}
+
+.vr-pricing-card:hover .vr-pricing-card__price {
+    transform: scale(1.05);
+}
+
+.vr-pricing-card__amount {
+    font-size: var(--vr-text-3xl);
+    font-weight: var(--vr-font-bold);
+    color: var(--vr-primary);
+    transition: color 0.3s ease;
+}
+
+.vr-pricing-card__period {
+    font-size: var(--vr-text-sm);
+    color: var(--vr-gray-500);
+    transition: color 0.3s ease;
+}
+
+.vr-pricing-card__features {
+    padding: var(--vr-spacing-lg);
+    background: var(--vr-light);
+}
+
+.vr-pricing-card__features ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.vr-pricing-card__features li {
+    display: flex;
+    align-items: center;
+    gap: var(--vr-spacing-sm);
+    padding: var(--vr-spacing-sm) 0;
+    color: var(--vr-gray-700);
+    transition: transform 0.2s ease;
+}
+
+.vr-pricing-card__features li:hover {
+    transform: translateX(4px);
+}
+
+.vr-pricing-card__features li i {
+    width: 20px;
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.vr-pricing-card__features li:hover i {
+    transform: scale(1.2);
+}
+
+.vr-pricing-card__features li i.fa-check {
+    color: var(--vr-success);
+}
+
+.vr-pricing-card__features li i.fa-times {
+    color: var(--vr-error);
+}
+
+.vr-pricing-card__actions {
+    padding: var(--vr-spacing-lg);
+    border-top: 1px solid var(--vr-gray-200);
+    background: var(--vr-gray-50);
+}
+
+.vr-pricing-card__stats {
+    margin-top: var(--vr-spacing-md);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--vr-spacing-sm);
+}
+
+.vr-pricing-card__stat {
+    text-align: center;
+    padding: var(--vr-spacing-sm);
+    background: var(--vr-light);
+    border-radius: var(--vr-radius-md);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.vr-pricing-card__stat:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--vr-shadow-md);
+}
+
+.vr-pricing-card__stat span {
+    display: block;
+    font-size: var(--vr-text-xs);
+    color: var(--vr-gray-500);
+    margin-bottom: 4px;
+}
+
+.vr-pricing-card__stat strong {
+    font-size: var(--vr-text-sm);
+    color: var(--vr-gray-900);
+}
+
+/* Features List in Modal */
+.vr-features-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--vr-spacing-sm);
+    margin-bottom: var(--vr-spacing-sm);
+}
+
+.vr-feature-item {
+    display: flex;
+    align-items: center;
+    gap: var(--vr-spacing-sm);
+    animation: slideIn 0.3s ease-out;
+}
+
+.vr-feature-item .vr-input {
+    flex: 1;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.vr-feature-item .vr-input:focus {
+    border-color: var(--vr-primary);
+    box-shadow: 0 0 0 2px var(--vr-primary-light);
+}
+
+/* Popular Badge */
+.vr-badge {
+    position: absolute;
+    top: var(--vr-spacing-sm);
+    right: var(--vr-spacing-sm);
+    padding: 4px var(--vr-spacing-sm);
+    border-radius: var(--vr-radius-full);
+    font-size: var(--vr-text-xs);
+    font-weight: var(--vr-font-medium);
+    animation: pulse 2s infinite;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .vr-pricing-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .vr-pricing-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .vr-pricing-card__stats {
+        grid-template-columns: 1fr;
+    }
+
+    .vr-pricing-card {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .vr-pricing-card {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid var(--vr-gray-300);
+    }
+
+    .vr-pricing-card__actions {
+        display: none;
+    }
+
+    .vr-pricing-card:hover {
+        transform: none;
+        box-shadow: none;
+    }
+
+    .vr-pricing-card::before {
+        display: none;
+    }
+}
+
+/* Loading States */
+.vr-pricing-card--loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.vr-pricing-card--loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+} 

@@ -1,0 +1,99 @@
+:root {
+    /* Colors */
+    --vr-primary: #056d3e;
+    --vr-primary-dark: #0f1010;
+    --vr-primary-light: #dbeafe;
+    --vr-primary-bg: #056d3e3a;
+
+    --vr-success: #10b981;
+    --vr-success-dark: #059669;
+    --vr-success-light: #d1fae5;
+
+    --vr-warning: #f59e0b;
+    --vr-warning-dark: #d97706;
+    --vr-warning-light: #fef3c7;
+
+    --vr-error: #ef4444;
+    --vr-error-dark: #dc2626;
+    --vr-error-light: #fee2e2;
+
+    --vr-dark: #022a14;
+    --vr-light: #ffffff;
+
+    /* Grays */
+    --vr-gray-50: #f9fafb;
+    --vr-gray-100: #f3f4f6;
+    --vr-gray-200: #e5e7eb;
+    --vr-gray-300: #d1d5db;
+    --vr-gray-400: #9ca3af;
+    --vr-gray-500: #6b7280;
+    --vr-gray-600: #4b5563;
+    --vr-gray-700: #374151;
+    --vr-gray-800: #1f2937;
+    --vr-gray-900: #111827;
+
+    /* Spacing */
+    --vr-spacing-xs: 0.5rem;   /* 8px */
+    --vr-spacing-sm: 0.75rem;  /* 12px */
+    --vr-spacing-md: 1rem;     /* 16px */
+    --vr-spacing-lg: 1.5rem;   /* 24px */
+    --vr-spacing-xl: 2rem;     /* 32px */
+    --vr-spacing-2xl: 2.5rem;  /* 40px */
+    --vr-spacing-3xl: 3rem;    /* 48px */
+
+    /* Border Radius */
+    --vr-radius-sm: 0.25rem;   /* 4px */
+    --vr-radius-md: 0.375rem;  /* 6px */
+    --vr-radius-lg: 0.5rem;    /* 8px */
+    --vr-radius-xl: 0.75rem;   /* 12px */
+    --vr-radius-2xl: 1rem;     /* 16px */
+    --vr-radius-pill: 9999px;
+
+    /* Typography */
+    --vr-font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --vr-text-xs: 0.75rem;     /* 12px */
+    --vr-text-sm: 0.875rem;    /* 14px */
+    --vr-text-base: 1rem;      /* 16px */
+    --vr-text-lg: 1.125rem;    /* 18px */
+    --vr-text-xl: 1.25rem;     /* 20px */
+    --vr-text-2xl: 1.5rem;     /* 24px */
+    --vr-text-3xl: 1.875rem;   /* 30px */
+
+    /* Font Weights */
+    --vr-font-normal: 400;
+    --vr-font-medium: 500;
+    --vr-font-semibold: 600;
+    --vr-font-bold: 700;
+
+    /* Transitions */
+    --vr-transition-fast: 150ms ease;
+    --vr-transition-normal: 250ms ease;
+    --vr-transition-slow: 350ms ease;
+
+    /* Shadows */
+    --vr-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --vr-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --vr-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --vr-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+
+    /* Z-index */
+    --vr-z-0: 0;
+    --vr-z-10: 10;
+    --vr-z-20: 20;
+    --vr-z-30: 30;
+    --vr-z-40: 40;
+    --vr-z-50: 50;
+    --vr-z-modal: 100;
+    --vr-z-toast: 1000;
+
+    /* Admin Specific */
+    --vr-admin-sidebar-width: 260px;
+    --vr-admin-header-height: 70px;
+    --vr-admin-content-padding: var(--vr-spacing-lg);
+    --vr-admin-bg: var(--vr-gray-50);
+    --vr-admin-sidebar-bg: var(--vr-dark);
+    --vr-admin-header-bg: var(--vr-light);
+    --vr-admin-card-bg: var(--vr-light);
+    --vr-admin-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    --vr-admin-card-shadow: 0 1px 3px rgba(0,0,0,0.12);
+} 

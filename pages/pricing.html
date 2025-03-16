@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pricing Management - Vyrlo Admin</title>
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Admin CSS -->
+    <link rel="stylesheet" href="../css/main.css" />
+  </head>
+  <body class="vr-admin">
+    <!-- Sidebar -->
+    <aside class="vr-sidebar">
+      <div class="vr-sidebar__header">
+        <img
+          src="/images/logo/logo.png"
+          alt="Vyrlo Admin"
+          class="vr-sidebar__logo"
+        />
+      </div>
+
+      <nav class="vr-sidebar__nav">
+        <a href="index.html" class="vr-sidebar__link">
+          <i class="fas fa-home"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="users.html" class="vr-sidebar__link">
+          <i class="fas fa-users"></i>
+          <span>Users</span>
+        </a>
+        <a href="listings.html" class="vr-sidebar__link">
+          <i class="fas fa-list"></i>
+          <span>Listings</span>
+        </a>
+        <a href="categories.html" class="vr-sidebar__link">
+          <i class="fas fa-tags"></i>
+          <span>Categories</span>
+        </a>
+        <a
+          href="pricing.html"
+          class="vr-sidebar__link vr-sidebar__link--active"
+        >
+          <i class="fas fa-tag"></i>
+          <span>Pricing</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="vr-admin-main">
+      <!-- Header Placeholder -->
+      <header class="vr-admin-header"></header>
+
+      <!-- Content -->
+      <div class="vr-admin-content">
+        <!-- Stats Grid -->
+        <div class="vr-stats-grid">
+          <div class="vr-stat-card">
+            <div class="vr-stat-card__icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <div class="vr-stat-card__content">
+              <div class="vr-stat-card__title">Total Subscribers</div>
+              <div class="vr-stat-card__value">2,543</div>
+              <div class="vr-stat-card__change">
+                <i class="fas fa-arrow-up"></i>
+                <span>15% from last month</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vr-stat-card">
+            <div class="vr-stat-card__icon">
+              <i class="fas fa-dollar-sign"></i>
+            </div>
+            <div class="vr-stat-card__content">
+              <div class="vr-stat-card__title">Monthly Revenue</div>
+              <div class="vr-stat-card__value">$45,890</div>
+              <div class="vr-stat-card__change">
+                <i class="fas fa-arrow-up"></i>
+                <span>12% from last month</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vr-stat-card">
+            <div class="vr-stat-card__icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="vr-stat-card__content">
+              <div class="vr-stat-card__title">Growth Rate</div>
+              <div class="vr-stat-card__value">8.5%</div>
+              <div class="vr-stat-card__change">
+                <i class="fas fa-arrow-up"></i>
+                <span>2.3% from last month</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vr-stat-card">
+            <div class="vr-stat-card__icon">
+              <i class="fas fa-undo"></i>
+            </div>
+            <div class="vr-stat-card__content">
+              <div class="vr-stat-card__title">Churn Rate</div>
+              <div class="vr-stat-card__value">2.1%</div>
+              <div class="vr-stat-card__change">
+                <i class="fas fa-arrow-down"></i>
+                <span>0.5% from last month</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pricing Plans Section -->
+        <div class="vr-admin-section">
+          <div class="vr-admin-section__header">
+            <h2 class="vr-admin-section__title">Pricing Plans</h2>
+            <button class="vr-btn vr-btn--primary" id="addPlanBtn">
+              <i class="fas fa-plus"></i>
+              <span>Add New Plan</span>
+            </button>
+          </div>
+
+          <!-- Plans Grid -->
+          <div class="vr-pricing-grid">
+            <!-- Basic Plan -->
+            <div class="vr-pricing-card">
+              <div class="vr-pricing-card__header">
+                <h3 class="vr-pricing-card__title">Basic</h3>
+                <div class="vr-pricing-card__price">
+                  <span class="vr-pricing-card__amount">$9</span>
+                  <span class="vr-pricing-card__period">/month</span>
+                </div>
+                <div class="vr-badge vr-badge--success">Most Popular</div>
+              </div>
+              <div class="vr-pricing-card__features">
+                <ul>
+                  <li><i class="fas fa-check"></i> 5 Listings</li>
+                  <li><i class="fas fa-check"></i> Basic Analytics</li>
+                  <li><i class="fas fa-check"></i> Email Support</li>
+                  <li><i class="fas fa-times"></i> Featured Listings</li>
+                  <li><i class="fas fa-times"></i> Priority Support</li>
+                </ul>
+              </div>
+              <div class="vr-pricing-card__actions">
+                <button
+                  class="vr-btn vr-btn--outline"
+                  onclick="editPlan('basic')"
+                >
+                  <i class="fas fa-edit"></i>
+                  <span>Edit Plan</span>
+                </button>
+                <div class="vr-pricing-card__stats">
+                  <div class="vr-pricing-card__stat">
+                    <span>Active Users</span>
+                    <strong>1,234</strong>
+                  </div>
+                  <div class="vr-pricing-card__stat">
+                    <span>Revenue</span>
+                    <strong>$11,106</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pro Plan -->
+            <div class="vr-pricing-card">
+              <div class="vr-pricing-card__header">
+                <h3 class="vr-pricing-card__title">Pro</h3>
+                <div class="vr-pricing-card__price">
+                  <span class="vr-pricing-card__amount">$29</span>
+                  <span class="vr-pricing-card__period">/month</span>
+                </div>
+              </div>
+              <div class="vr-pricing-card__features">
+                <ul>
+                  <li><i class="fas fa-check"></i> 20 Listings</li>
+                  <li><i class="fas fa-check"></i> Advanced Analytics</li>
+                  <li><i class="fas fa-check"></i> Priority Support</li>
+                  <li><i class="fas fa-check"></i> Featured Listings</li>
+                  <li><i class="fas fa-check"></i> API Access</li>
+                </ul>
+              </div>
+              <div class="vr-pricing-card__actions">
+                <button
+                  class="vr-btn vr-btn--outline"
+                  onclick="editPlan('pro')"
+                >
+                  <i class="fas fa-edit"></i>
+                  <span>Edit Plan</span>
+                </button>
+                <div class="vr-pricing-card__stats">
+                  <div class="vr-pricing-card__stat">
+                    <span>Active Users</span>
+                    <strong>856</strong>
+                  </div>
+                  <div class="vr-pricing-card__stat">
+                    <span>Revenue</span>
+                    <strong>$24,824</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Enterprise Plan -->
+            <div class="vr-pricing-card">
+              <div class="vr-pricing-card__header">
+                <h3 class="vr-pricing-card__title">Enterprise</h3>
+                <div class="vr-pricing-card__price">
+                  <span class="vr-pricing-card__amount">$99</span>
+                  <span class="vr-pricing-card__period">/month</span>
+                </div>
+              </div>
+              <div class="vr-pricing-card__features">
+                <ul>
+                  <li><i class="fas fa-check"></i> Unlimited Listings</li>
+                  <li><i class="fas fa-check"></i> Custom Analytics</li>
+                  <li><i class="fas fa-check"></i> 24/7 Support</li>
+                  <li><i class="fas fa-check"></i> Featured Listings</li>
+                  <li><i class="fas fa-check"></i> Custom Integration</li>
+                </ul>
+              </div>
+              <div class="vr-pricing-card__actions">
+                <button
+                  class="vr-btn vr-btn--outline"
+                  onclick="editPlan('enterprise')"
+                >
+                  <i class="fas fa-edit"></i>
+                  <span>Edit Plan</span>
+                </button>
+                <div class="vr-pricing-card__stats">
+                  <div class="vr-pricing-card__stat">
+                    <span>Active Users</span>
+                    <strong>453</strong>
+                  </div>
+                  <div class="vr-pricing-card__stat">
+                    <span>Revenue</span>
+                    <strong>$44,847</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Subscribers Section -->
+        <div class="vr-admin-section">
+          <div class="vr-admin-section__header">
+            <h2 class="vr-admin-section__title">Recent Subscriptions</h2>
+          </div>
+
+          <!-- Subscribers Table -->
+          <div class="vr-table-container">
+            <table class="vr-table">
+              <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Plan</th>
+                  <th>Status</th>
+                  <th>Start Date</th>
+                  <th>Next Billing</th>
+                  <th>Amount</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="subscribersTableBody">
+                <!-- Subscribers will be loaded here dynamically -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Pagination -->
+          <div class="vr-pagination">
+            <button class="vr-btn vr-btn--outline" id="prevPageBtn">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="vr-pagination__info">
+              Page <span id="currentPage">1</span> of
+              <span id="totalPages">10</span>
+            </div>
+            <button class="vr-btn vr-btn--outline" id="nextPageBtn">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Add/Edit Plan Modal -->
+    <div class="vr-modal" id="planModal">
+      <div class="vr-modal__container">
+        <div class="vr-modal__header">
+          <h3 class="vr-modal__title">Add New Plan</h3>
+          <button class="vr-modal__close" data-dismiss="modal">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <form id="planForm" class="vr-modal__content">
+          <div class="vr-form-group">
+            <label for="planName" class="vr-label">Plan Name</label>
+            <input
+              type="text"
+              id="planName"
+              name="name"
+              class="vr-input"
+              required
+            />
+          </div>
+
+          <div class="vr-form-group">
+            <label for="planPrice" class="vr-label">Monthly Price</label>
+            <div class="vr-input-group">
+              <span class="vr-input-group__addon">$</span>
+              <input
+                type="number"
+                id="planPrice"
+                name="price"
+                class="vr-input"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="vr-form-group">
+            <label for="planDescription" class="vr-label">Description</label>
+            <textarea
+              id="planDescription"
+              name="description"
+              class="vr-input"
+              rows="3"
+              required
+            ></textarea>
+          </div>
+
+          <div class="vr-form-group">
+            <label class="vr-label">Features</label>
+            <div class="vr-features-list" id="featuresList">
+              <div class="vr-feature-item">
+                <input
+                  type="text"
+                  class="vr-input"
+                  name="features[]"
+                  placeholder="Enter feature"
+                />
+                <button
+                  type="button"
+                  class="vr-btn vr-btn--icon vr-btn--error"
+                  onclick="removeFeature(this)"
+                >
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <button
+              type="button"
+              class="vr-btn vr-btn--outline vr-btn--sm"
+              onclick="addFeature()"
+            >
+              <i class="fas fa-plus"></i>
+              <span>Add Feature</span>
+            </button>
+          </div>
+
+          <div class="vr-form-group">
+            <label class="vr-checkbox">
+              <input type="checkbox" id="planPopular" name="popular" />
+              <span>Mark as Popular Plan</span>
+            </label>
+          </div>
+
+          <div class="vr-modal__footer">
+            <button
+              type="button"
+              class="vr-btn vr-btn--outline"
+              data-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button type="submit" class="vr-btn vr-btn--primary">
+              <span>Save Plan</span>
+              <div class="vr-spinner vr-spinner--sm"></div>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="vr-toast-container" id="toastContainer"></div>
+
+    <!-- Core Services -->
+    <script src="../js/services/auth.service.js"></script>
+    <script src="../js/services/api.service.js"></script>
+    <script src="../js/services/toast.service.js"></script>
+
+    <!-- Components -->
+    <script src="../js/components/Modal.js"></script>
+    <script src="../js/components/Toast.js"></script>
+    <script src="../js/components/HeaderLoader.js"></script>
+
+    <!-- Page Scripts -->
+    <script src="../js/pages/pricing.js"></script>
+  </body>
+</html>

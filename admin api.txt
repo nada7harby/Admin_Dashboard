@@ -1,0 +1,305 @@
+API Base URL:"https://virlo.vercel.app"
+
+###Admin login/authentication endpoints
+##sign in admin :
+URL :https://virlo.vercel.app/admin/signin
+#body:
+{
+  "username": "super",
+  "password": "m1234567"
+}
+#response:
+if succes send :  {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InN1cGVyIiwidXNlcklkIjoiNjdiMzdmMmYxYmE1NDAxM2JlZGI2NGM2IiwicGVybWlzc2lvbnMiOltdLCJpc1N1cGVyQWRtaW4iOnRydWUsImlhdCI6MTc0MTYzOTUwMH0.BTITL_V_-T0ttZaZSDIXzqSbkoTUHVz48V8UHfsJbII"
+}
+
+
+## craete admin
+URL :https://virlo.vercel.app/admin/create
+#body:
+{
+  "username": "admin",
+  "password": "m1234567",
+  "permissions": ["user-manage","cash-mange","admin-manage","category-mange"]
+//   "isSuperAdmin":true
+}
+  header: token
+
+#response:
+if succes send : {
+    "message": "Username already exists",
+    "error": "Conflict",
+    "statusCode": 409
+}
+
+
+## delete Admin
+URL :https://virlo.vercel.app/admin/delete/{Id}
+#body:
+{
+  "username": "test",
+  "password": "m1234567",
+  "permissions": ["test"]
+}
+
+header: token
+
+#response:
+if succes send : {
+    "message": user id deleted",
+    "error": "Conflict",
+    "statusCode": 409
+}
+if failed send :{
+    "message": "Admin with ID 67b37ef81ba54013bedb64c2 not found",
+    "error": "Not Found",
+    "statusCode": 404
+}
+
+
+##update admin
+
+URL :https://virlo.vercel.app/admin/update/{Id}
+#body:
+{
+  "username": "ahmed",
+  "password":"m506070"
+}
+header: token
+
+#response:
+if succes send : {
+    "message": user id updated",
+    "error": "Conflict",
+    "statusCode": 409
+}
+if failed send :{
+    "message": "Admin with ID 67b37ef81ba54013bedb64c2 not found",
+    "error": "Not Found",
+    "statusCode": 404
+}
+
+
+##get all admin
+
+URL :https://virlo.vercel.app/admin/all
+#body:
+
+header: token
+
+#response:{
+    "total": 2,
+    "totalPages": 1,
+    "page": 1,
+    "limit": 10,
+    "data": [
+        {
+            "_id": "67b1b52fdb68390718094a4a",
+            "username": "test",
+            "password": "$2b$10$.VR/hMGtiGuZla2ni0bwWu6xw1T76DyR76BUzF5HyqBhwpyf7Qxs.",
+            "isSuperAdmin": false,
+            "permissions": [
+                "test"
+            ],
+            "createdAt": "2025-02-16T09:51:43.582Z",
+            "updatedAt": "2025-02-16T09:51:43.582Z",
+            "__v": 0
+        },
+        {
+            "_id": "67b37f2f1ba54013bedb64c6",
+            "username": "super",
+            "password": "$2b$10$WY2FFCrLpcpIHxxM3lvD.uVJENqPzqhiEyY2OokUXcn4ni4ItRMD.",
+            "isSuperAdmin": true,
+            "permissions": [],
+            "createdAt": "2025-02-17T18:25:51.232Z",
+            "updatedAt": "2025-02-17T18:25:51.232Z",
+            "__v": 0
+        }
+    ]
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+####category admin
+
+## add categories
+URL :https://virlo.vercel.app/categories
+#body:
+{
+       
+        "categoryName": "tset50",
+        "iconOne": "",
+        "iconTwo": "",
+        "amenities": [
+            "Free quotes and policy comparisons",
+            "Educational webinars on insurance types",
+            "24/7 hotline for claims assistance",
+            "Mobile app for policy management",
+            "Coverage reviews with no cost",
+            "Discounts for bundling policies",
+            "Personalized coverage recommendations",
+            "Community outreach events on insurance literacy",
+            "Claims tracking via SMS updates",
+            "Easy online claim submission process"
+        ]
+    }
+  header: token
+
+#response:
+if succes send : {
+    "message": "categories added",
+    "error": "Conflict",
+    "statusCode": 409
+}
+if failed
+{
+    "statusCode": 500,
+    "message": "Internal server error"
+}
+
+
+
+
+## update categorie
+URL :https://virlo.vercel.app/categories/{id}
+#body:
+{
+       
+        "categoryName": "tset50",
+        "iconOne": "",
+        "iconTwo": "",
+        "amenities": [
+            "Free quotes and policy comparisons",
+            "Educational webinars on insurance types",
+            "24/7 hotline for claims assistance",
+            "Mobile app for policy management",
+            "Coverage reviews with no cost",
+            "Discounts for bundling policies",
+            "Personalized coverage recommendations",
+            "Community outreach events on insurance literacy",
+            "Claims tracking via SMS updates",
+            "Easy online claim submission process"
+        ]
+    }
+  #header: token
+
+#response:
+if succes send : {
+    "message": "categories updated",
+    "error": "Conflict",
+    "statusCode": 409
+}
+if failed
+{
+    "statusCode": 500,
+    "message": "Internal server error"
+}
+
+
+## update categorie
+URL :https://virlo.vercel.app/categories/{id}
+#body:
+
+
+#response:
+if succes send : {
+    "message": "categories founded",
+    "error": "Conflict",
+    "statusCode": 409
+}
+if failed
+{"message": "categories not founded",
+    "statusCode": 500,
+    "message": "Internal server error"
+}
+
+
+
+## delete categorie
+URL :https://virlo.vercel.app/categories/{id}
+#body:
+
+
+#response:
+if succes send : {
+    "message": "categories deleted",
+    "error": "Conflict",
+    "statusCode": 409
+}
+if failed
+{"message": "categories not deleted",
+    "statusCode": 500,
+    "message": "Internal server error"
+}
+
+
+
+
+###listing admin
+
+## get all listing
+URL :https://virlo.vercel.app/listing/?lastValue=1&name=My&location=New York&categoryId=67ae1e66c57141f547bc1f47
+
+#params: lastValue,name,location,categoryId
+
+
+#response:
+if succes send : {
+    "listings": [],
+    "lastValue": 4,
+    "totalItems": 0
+}
+
+
+
+
+## get listing by id
+URL :https://virlo.vercel.app/listing/id
+
+#response:
+if succes send : {
+    "message": "categories deleted",
+    "error": "Conflict",
+    "statusCode": 409
+}
+if failed
+{
+    "message": "Listing is not found"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+url:https://virlo.vercel.app/categories  for create  category admin
+
+url:https://virlo.vercel.app/categories  for create  category admin
+
+

@@ -1,0 +1,442 @@
+/* Admin Login Page */
+.vr-admin-login {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--vr-admin-bg);
+    padding: var(--vr-spacing-md);
+}
+
+/* Login Container */
+.vr-login-container {
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Login Card */
+.vr-login-card {
+    background: var(--vr-light);
+    border-radius: var(--vr-radius-lg);
+    box-shadow: var(--vr-shadow-lg);
+    padding: var(--vr-spacing-xl);
+}
+
+.vr-login-card__header {
+    text-align: center;
+    margin-bottom: var(--vr-spacing-xl);
+}
+
+.vr-login-logo {
+    height: 48px;
+    margin-bottom: var(--vr-spacing-md);
+}
+
+.vr-login-title {
+    font-size: var(--vr-text-2xl);
+    font-weight: var(--vr-font-bold);
+    color: var(--vr-gray-900);
+    margin-bottom: var(--vr-spacing-sm);
+}
+
+.vr-login-subtitle {
+    font-size: var(--vr-text-sm);
+    color: var(--vr-gray-600);
+}
+
+/* Login Form */
+.vr-login-form {
+    margin-bottom: var(--vr-spacing-lg);
+}
+
+.vr-form-group {
+    margin-bottom: var(--vr-spacing-md);
+}
+
+.vr-label {
+    display: block;
+    font-size: var(--vr-text-sm);
+    font-weight: var(--vr-font-medium);
+    color: var(--vr-gray-700);
+    margin-bottom: var(--vr-spacing-xs);
+}
+
+.vr-input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.vr-input-group__addon {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--vr-gray-400);
+}
+
+.vr-input-group__addon:last-child {
+    right: 0;
+    cursor: pointer;
+    transition: color var(--vr-transition-fast);
+}
+
+.vr-input-group__addon:last-child:hover {
+    color: var(--vr-gray-600);
+}
+
+.vr-input {
+    width: 100%;
+    height: 40px;
+    padding: 0 40px;
+    border: 1px solid var(--vr-gray-200);
+    border-radius: var(--vr-radius-md);
+    font-size: var(--vr-text-sm);
+    transition: all var(--vr-transition-fast);
+}
+
+.vr-input:focus {
+    border-color: var(--vr-primary);
+    box-shadow: 0 0 0 3px var(--vr-primary-bg);
+}
+
+.vr-input.error {
+    border-color: var(--vr-error);
+}
+
+.vr-error-text {
+    display: none;
+    font-size: var(--vr-text-xs);
+    color: var(--vr-error);
+    margin-top: var(--vr-spacing-xs);
+}
+
+.vr-error-text.show {
+    display: block;
+}
+
+/* Checkbox */
+.vr-checkbox {
+    display: flex;
+    align-items: center;
+    gap: var(--vr-spacing-sm);
+    cursor: pointer;
+}
+
+.vr-checkbox input {
+    width: 16px;
+    height: 16px;
+    border-radius: var(--vr-radius-sm);
+    border: 1px solid var(--vr-gray-300);
+    transition: all var(--vr-transition-fast);
+}
+
+.vr-checkbox input:checked {
+    background: var(--vr-primary);
+    border-color: var(--vr-primary);
+}
+
+.vr-checkbox span {
+    font-size: var(--vr-text-sm);
+    color: var(--vr-gray-600);
+}
+
+/* Submit Button */
+.vr-btn--full {
+    width: 100%;
+    position: relative;
+}
+
+.vr-btn--full .vr-spinner {
+    position: absolute;
+    display: none;
+}
+
+.vr-btn--full.loading {
+    pointer-events: none;
+}
+
+.vr-btn--full.loading span {
+    visibility: hidden;
+}
+
+.vr-btn--full.loading .vr-spinner {
+    display: block;
+}
+
+/* Login Footer */
+.vr-login-footer {
+    text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .vr-login-card {
+        padding: var(--vr-spacing-lg);
+    }
+    
+    .vr-login-logo {
+        height: 40px;
+    }
+    
+    .vr-login-title {
+        font-size: var(--vr-text-xl);
+    }
+}
+
+/* Auth Page Styles */
+.vr-auth-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-color-light) 0%, var(--primary-color) 100%);
+    padding: 1.5rem;
+}
+
+.vr-auth-container {
+    width: 100%;
+    max-width: 420px;
+    animation: slideUp 0.5s ease-out;
+}
+
+.vr-auth-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    padding: 2.5rem;
+    transform: translateY(0);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.vr-auth-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.vr-auth-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.vr-auth-logo {
+    width: 140px;
+    height: auto;
+    margin-bottom: 1.5rem;
+    animation: pulse 2s infinite;
+}
+
+.vr-auth-header h1 {
+    font-size: 1.75rem;
+    color: var(--text-primary);
+    margin: 0 0 0.75rem 0;
+    font-weight: 700;
+}
+
+.vr-auth-header p {
+    color: var(--text-secondary);
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.vr-auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+}
+
+/* Form Groups */
+.vr-form-group {
+    position: relative;
+}
+
+.vr-form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+/* Input Groups */
+.vr-input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.vr-input-icon {
+    position: absolute;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    z-index: 1;
+    transition: color 0.3s ease;
+}
+
+.vr-input {
+    width: 100%;
+    height: 42px;
+    padding: 0 42px;
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.vr-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px var(--primary-color-light);
+    background: #ffffff;
+}
+
+.vr-input::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+/* Password Toggle */
+.vr-password-toggle {
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.vr-password-toggle:hover {
+    color: var(--primary-color);
+}
+
+/* Error Messages */
+.vr-input-error {
+    display: none;
+    color: var(--error-color);
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    padding-right: 0.5rem;
+    animation: shake 0.5s ease-in-out;
+}
+
+/* Submit Button */
+.vr-btn {
+    height: 42px;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.vr-btn--primary {
+    background: linear-gradient(45deg, var(--primary-color) 0%, var(--primary-color-dark) 100%);
+    border: none;
+    color: white;
+    border-radius: 12px;
+}
+
+.vr-btn--primary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(var(--primary-color-rgb), 0.3);
+}
+
+.vr-btn--primary:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.vr-btn:disabled {
+    opacity: 0.8;
+    cursor: not-allowed;
+}
+
+/* Animations */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-5px);
+    }
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+/* RTL Specific */
+[dir="rtl"] .vr-input-icon:first-child {
+    right: 0;
+    left: auto;
+}
+
+[dir="rtl"] .vr-input-icon:last-child {
+    left: 0;
+    right: auto;
+}
+
+[dir="rtl"] .vr-input {
+    padding-right: 42px;
+    padding-left: 42px;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .vr-auth-card {
+        padding: 2rem;
+    }
+
+    .vr-auth-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .vr-auth-logo {
+        width: 120px;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .vr-auth-card {
+        background: rgba(30, 30, 30, 0.95);
+    }
+
+    .vr-input {
+        background: rgba(45, 45, 45, 0.9);
+        color: #ffffff;
+    }
+
+    .vr-input:focus {
+        background: rgba(50, 50, 50, 0.95);
+    }
+} 
