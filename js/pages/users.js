@@ -36,7 +36,7 @@ function setupEventListeners() {
         userForm.reset();
         userModal.setTitle('Add New User');
         userModal.show();
-    });
+});
 
     // Form Submit
     userForm.addEventListener('submit', handleUserSubmit);
