@@ -25,11 +25,11 @@ class DashboardPage {
         const section = e.target.closest(".vr-admin-section");
         if (section.querySelector(".vr-table")) {
           if (section.querySelector("h2").textContent.includes("Listings")) {
-            window.location.href = "listings.html";
+            window.location.href = "../pages/listings.html";
           } else if (
             section.querySelector("h2").textContent.includes("Admin")
           ) {
-            window.location.href = "users.html";
+            window.location.href = "../pages/users.html";
           }
         }
       });
@@ -147,7 +147,7 @@ async loadStatActive() {
                         </span>
                     </td>
                     <td>
-                        <button class="vr-btn vr-btn--icon" onclick="window.location.href='listings.html?id=${
+                        <button class="vr-btn vr-btn--icon" onclick="window.location.href='../pages/listings.html?id=${
                           listing._id
                         }'">
                             <i class="fas fa-eye"></i>

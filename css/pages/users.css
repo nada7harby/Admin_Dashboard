@@ -220,7 +220,7 @@
 
 .vr-password-toggle {
     position: absolute;
-    left: 0.5rem;
+    right: 0.5rem;
     top: 50%;
     transform: translateY(-50%);
     background: none;

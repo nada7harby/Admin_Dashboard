@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تسجيل الدخول | لوحة التحكم</title>
+    <title>Login | Admin Dashboard</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -11,14 +11,14 @@
     <div class="vr-auth-container">
         <div class="vr-auth-card">
             <div class="vr-auth-header">
-                <img src="../assets/images/logo.png" alt="Vyrlo Logo" class="vr-auth-logo">
-                <h1>تسجيل الدخول للوحة التحكم</h1>
-                <p>قم بإدخال بيانات الدخول للوصول إلى لوحة التحكم</p>
+                <img src="../images/logo/logo.png" alt="Vyrlo Logo" class="vr-auth-logo">
+                <h1>Login to Admin Dashboard</h1>
+                <p>Enter your credentials to access the admin dashboard</p>
             </div>
 
             <form id="loginForm" class="vr-auth-form">
                 <div class="vr-form-group">
-                    <label for="username">اسم المستخدم</label>
+                    <label for="username">Username</label>
                     <div class="vr-input-group">
                         <span class="vr-input-icon">
                             <i class="fas fa-user"></i>
@@ -30,14 +30,14 @@
                             class="vr-input" 
                             required 
                             minlength="3"
-                            placeholder="أدخل اسم المستخدم"
+                            placeholder="Enter your username"
                         >
                     </div>
                     <div class="vr-input-error" data-error="username"></div>
                 </div>
 
                 <div class="vr-form-group">
-                    <label for="password">كلمة المرور</label>
+                    <label for="password">Password</label>
                     <div class="vr-input-group">
                         <span class="vr-input-icon">
                             <i class="fas fa-lock"></i>
@@ -49,7 +49,7 @@
                             class="vr-input" 
                             required 
                             minlength="8"
-                            placeholder="أدخل كلمة المرور"
+                            placeholder="Enter your password"
                         >
                         <button type="button" class="vr-input-icon vr-password-toggle" tabindex="-1">
                             <i class="fas fa-eye"></i>
@@ -60,7 +60,7 @@
 
                 <div class="vr-form-group">
                     <button type="submit" class="vr-btn vr-btn--primary vr-btn--block">
-                        <span>تسجيل الدخول</span>
+                        <span>Login</span>
                         <i class="fas fa-sign-in-alt"></i>
                     </button>
                 </div>
@@ -106,12 +106,12 @@
                 const username = this.usernameInput.value.trim();
                 
                 if (!username) {
-                    this.showError('username', 'اسم المستخدم مطلوب');
+                    this.showError('username', 'Username is required');
                     return false;
                 }
 
                 if (username.length < 3) {
-                    this.showError('username', 'اسم المستخدم يجب أن يكون 3 أحرف على الأقل');
+                    this.showError('username', 'Username must be at least 3 characters');
                     return false;
                 }
 
@@ -123,12 +123,12 @@
                 const password = this.passwordInput.value;
                 
                 if (!password) {
-                    this.showError('password', 'كلمة المرور مطلوبة');
+                    this.showError('password', 'Password is required');
                     return false;
                 }
 
                 if (password.length < 8) {
-                    this.showError('password', 'كلمة المرور يجب أن تكون 8 أحرف على الأقل');
+                    this.showError('password', 'Password must be at least 8 characters');
                     return false;
                 }
 
@@ -162,7 +162,7 @@
                 const icon = button.querySelector('i');
 
                 button.disabled = isLoading;
-                span.textContent = isLoading ? 'جاري تسجيل الدخول...' : 'تسجيل الدخول';
+                span.textContent = isLoading ? 'Logging in...' : 'Login';
                 icon.className = isLoading ? 'fas fa-spinner fa-spin' : 'fas fa-sign-in-alt';
             }
 
@@ -186,7 +186,7 @@
                     localStorage.setItem('adminData', JSON.stringify(response));
 
                     // Show success message
-                    window.toastService.show('تم تسجيل الدخول بنجاح', 'success');
+                    window.toastService.show('Login successful', 'success');
 
                     // Redirect to dashboard
                     setTimeout(() => {
@@ -195,7 +195,7 @@
 
                 } catch (error) {
                     window.toastService.show(
-                        error.message || 'فشل تسجيل الدخول. يرجى التحقق من البيانات والمحاولة مرة أخرى.',
+                        error.message || 'Login failed. Please check your credentials and try again.',
                         'error'
                     );
                 } finally {
@@ -208,4 +208,4 @@
         const loginPage = new LoginPage();
     </script>
 </body>
-</html> 
+</html>

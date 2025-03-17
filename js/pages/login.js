@@ -135,7 +135,7 @@ class AdminLogin {
 
             // Redirect to dashboard
             setTimeout(() => {
-                window.location.href = '/admin';
+                window.location.href = '/index.html';
             }, 1000);
 
         } catch (error) {
