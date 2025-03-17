@@ -26,7 +26,7 @@ async function checkAuth() {
         if (!isAuthenticated) {
             toast.error('Please login to access this page');
             setTimeout(() => {
-                window.location.href = '/login.html';
+                window.location.href = './login.html';
             }, 1500);
             return false;
         }
@@ -35,7 +35,7 @@ async function checkAuth() {
         console.error('Auth check failed:', error);
         toast.error('Authentication check failed');
         setTimeout(() => {
-            window.location.href = '/login.html';
+            window.location.href = './login.html';
         }, 1500);
         return false;
     }

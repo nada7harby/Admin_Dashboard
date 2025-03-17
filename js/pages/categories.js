@@ -9,7 +9,7 @@ class CategoriesPage {
       // تحقق من وجود token
       if (!this.token) {
           alert("You are not authorized. Redirecting to login...");
-          window.location.href = "/login"; // إعادة توجيه إلى صفحة تسجيل الدخول
+          window.location.href = "./login.html"; // إعادة توجيه إلى صفحة تسجيل الدخول
       }
   }
 
@@ -243,7 +243,7 @@ setupEventListeners() {
 
           // إذا كان الخطأ بسبب 401 أو انتهاء صلاحية الـ token، قم بإعادة توجيه المستخدم إلى صفحة تسجيل الدخول
           if (error.message.includes("401") || error.message.includes("Token expired")) {
-              window.location.href = "/login";
+              window.location.href = "./login.html";
           }
       }
   }

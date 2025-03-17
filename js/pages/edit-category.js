@@ -5,7 +5,7 @@ class EditCategoryPage {
     this.categoryId = new URLSearchParams(window.location.search).get("id");
     this.amenities = [];
     if (!this.token) {
-      window.location.href = "/login";
+      window.location.href = "./login.html";
       return;
     }
 

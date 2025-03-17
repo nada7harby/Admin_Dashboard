@@ -5,7 +5,7 @@ class AddCategoryPage {
         this.amenities = [];
 
         if (!this.token) {
-            window.location.href = "/login";
+            window.location.href = "./pages/login.html";
             return;
         }
 
