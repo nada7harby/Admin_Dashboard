@@ -14,12 +14,45 @@ const statusFilter = document.getElementById("statusFilter");
 const categoryFilter = document.getElementById("categoryFilter");
 const dateFrom = document.getElementById("dateFrom");
 const dateTo = document.getElementById("dateTo");
-const applyFiltersBtn = document.getElementById("applyFiltersBtn");
+const apply = document.getElementById("apply");
 const prevPageBtn = document.getElementById("prevPageBtn");
 const nextPageBtn = document.getElementById("nextPageBtn");
 const currentPageSpan = document.getElementById("currentPage");
 const totalPagesSpan = document.getElementById("totalPages");
 const searchInput = document.querySelector(".vr-admin-header__search input");
+let table; // Add this variable at the top with other state variables
+
+$(document).ready(function () {
+  // Initialize DataTable
+  table = $("#listingsTable").DataTable({
+    paging: true,
+    searching: true,
+    ordering: true,
+    info: true,
+    pageLength: 10,
+    lengthMenu: [10, 25, 50, 100],
+    language: {
+      search: "بحث:",
+      lengthMenu: "عرض _MENU_ عنصر لكل صفحة",
+      info: "عرض _START_ إلى _END_ من _TOTAL_ عنصر",
+      paginate: {
+        first: "الأول",
+        last: "الأخير",
+        next: "التالي",
+        previous: "السابق"
+      }
+    },
+    dom: 'Bfrtip',
+    buttons: [
+      'copy', 'csv', 'excel', 'pdf', 'print'
+    ]
+  });
+
+  // Add search functionality to the custom search input
+  $(".vr-admin-header__search input").on('keyup', function() {
+    table.search(this.value).draw();
+  });
+});
 
 // State
 // let currentPage = 1;
@@ -30,19 +63,21 @@ let editingListingId = null;
 document.addEventListener("DOMContentLoaded", () => {
   loadListings();
   setupEventListeners();
+  const apply = document.getElementById("apply");
+    apply.addEventListener("click", applyFilters);
 });
-function applyFilters() {
-  const filters = {
-    status: statusFilter.value,
-    category: categoryFilter.value,
-    dateFrom: dateFrom.value,
-    dateTo: dateTo.value,
-    page: 1, // العودة إلى الصفحة الأولى عند تطبيق الفلترة
-  };
+// function applyFilters() {
+//   const filters = {
+//     status: statusFilter.value,
+//     category: categoryFilter.value,
+//     dateFrom: dateFrom.value,
+//     dateTo: dateTo.value,
+//     page: 1, // العودة إلى الصفحة الأولى عند تطبيق الفلترة
+//   };
 
-  currentPage = 1;
-  loadListings(filters);
-}
+//   currentPage = 1;
+//   loadListings(filters);
+// }
 function handleSearch(e) {
   const searchTerm = e.target.value.trim();
   currentPage = 1; // العودة إلى الصفحة الأولى عند البحث
@@ -57,8 +92,35 @@ function setupEventListeners() {
     selectedImages = [];
     listingModal.setTitle("Add New Listing");
     listingModal.show();
+    document
+      .getElementById("apply")
+      .addEventListener("click", applyFilters);
   });
 
+  function applyFilters() {
+    // جمع قيم الفلترة من الفورم
+    const statusValue = document.getElementById("statusFilter").value;
+    const locationValue = document.getElementById("locationFilter").value.trim().toLowerCase();
+    const categoryValue = document.getElementById("categoryFilter").value;
+
+    // تصفية البيانات بناءً على القيم المحددة
+    const filteredListings = allListings.filter(listing => {
+        // فلترة الحالة (Status)
+        const statusMatch = statusValue ? listing.isActive === (statusValue === "active") : true;
+
+        // فلترة الموقع (Location)
+        const locationMatch = locationValue ? listing.location?.toLowerCase().includes(locationValue) : true;
+
+        // فلترة الفئة (Category)
+        const categoryMatch = categoryValue ? listing.categoryId?.categoryName === categoryValue : true;
+
+        // إرجاع العناصر التي تطابق جميع الشروط
+        return statusMatch && locationMatch && categoryMatch;
+    });
+
+    // عرض البيانات المصفاة
+    renderListings(filteredListings);
+}
   // Form Submit
   listingForm.addEventListener("submit", handleListingSubmit);
 
@@ -66,7 +128,7 @@ function setupEventListeners() {
   listingImages.addEventListener("change", handleImageUpload);
 
   // Filters
-  applyFiltersBtn.addEventListener("click", applyFilters);
+  apply.addEventListener("click", applyFilters);
 
   // Pagination
   prevPageBtn.addEventListener("click", () => changePage(currentPage - 1));
@@ -139,22 +201,34 @@ function setupEventListeners() {
 // دالة لجلب إحصائيات الـ listings
 async function fetchListingsStats() {
   try {
-    const response = await fetch("https://virlo.vercel.app/listing/?lastValue=15");
+    const response = await fetch(
+      "https://virlo.vercel.app/listing/?lastValue=15"
+    );
     const data = await response.json();
     const listings = data.listings;
 
     // حساب الإحصائيات
     const totalListings = listings.length;
-    const activeListings = listings.filter(listing => listing.isActive).length;
-    const postedListings = listings.filter(listing => listing.isPosted).length;
-    const notPostedListings = listings.filter(listing => !listing.isPosted).length;
+    const activeListings = listings.filter((listing) => listing.isActive)
+      .length;
+    const postedListings = listings.filter((listing) => listing.isPosted)
+      .length;
+    const notPostedListings = listings.filter((listing) => !listing.isPosted)
+      .length;
 
     // عرض الإحصائيات في الكروت
-    document.querySelector(".vr-stat-card:nth-child(1) .vr-stat-card__value").textContent = totalListings;
-    document.querySelector(".vr-stat-card:nth-child(2) .vr-stat-card__value").textContent = activeListings;
-    document.querySelector(".vr-stat-card:nth-child(3) .vr-stat-card__value").textContent = postedListings;
-    document.querySelector(".vr-stat-card:nth-child(4) .vr-stat-card__value").textContent = notPostedListings;
-
+    document.querySelector(
+      ".vr-stat-card:nth-child(1) .vr-stat-card__value"
+    ).textContent = totalListings;
+    document.querySelector(
+      ".vr-stat-card:nth-child(2) .vr-stat-card__value"
+    ).textContent = activeListings;
+    document.querySelector(
+      ".vr-stat-card:nth-child(3) .vr-stat-card__value"
+    ).textContent = postedListings;
+    document.querySelector(
+      ".vr-stat-card:nth-child(4) .vr-stat-card__value"
+    ).textContent = notPostedListings;
   } catch (error) {
     console.error("Error fetching listings stats:", error);
     toast.error("Failed to fetch listings stats");
@@ -169,45 +243,56 @@ let allListings = []; // تخزين جميع القوائم
 let currentPage = 1; // الصفحة الحالية
 const listingsPerPage = 10; // عدد العناصر في كل صفحة
 
+// async function loadListings() {
+//   try {
+//     // عرض حالة التحميل
+//     listingsTableBody.innerHTML = `
+//       <tr>
+//         <td colspan="7" class="vr-table__empty">
+//           <div class="vr-spinner"></div>
+//           Loading listings...
+//         </td>
+//       </tr>
+//     `;
+
+//     // جلب جميع القوائم من الـ API
+//     const response = await fetch(
+//       "https://virlo.vercel.app/listing/?lastValue=15"
+//     );
+//     const data = await response.json();
+//     allListings = data.listings;
+//     console.log(allListings);
+
+//     // تحديث Pagination وعرض الصفحة الأولى
+//     updatePagination({
+//       currentPage: 1,
+//       totalPages: Math.ceil(allListings.length / listingsPerPage),
+//     });
+//     renderListings(allListings.slice(0, listingsPerPage));
+//   } catch (error) {
+//     console.error("Error loading listings:", error);
+//     toast.error("Failed to load listings");
+//     listingsTableBody.innerHTML = `
+//       <tr>
+//         <td colspan="7" class="vr-table__empty">
+//           Failed to load listings. Please try again.
+//         </td>
+//       </tr>
+//     `;
+//   }
+// }
+
 async function loadListings() {
   try {
-    // عرض حالة التحميل
-    listingsTableBody.innerHTML = `
-      <tr>
-        <td colspan="7" class="vr-table__empty">
-          <div class="vr-spinner"></div>
-          Loading listings...
-        </td>
-      </tr>
-    `;
-
-    // جلب جميع القوائم من الـ API
-    const response = await fetch(
-      "https://virlo.vercel.app/listing/?lastValue=15"
-    );
-    const data = await response.json();
-    allListings = data.listings;
-    console.log(allListings);
-
-    // تحديث Pagination وعرض الصفحة الأولى
-    updatePagination({
-      currentPage: 1,
-      totalPages: Math.ceil(allListings.length / listingsPerPage),
-    });
-    renderListings(allListings.slice(0, listingsPerPage));
+      const response = await fetch("https://virlo.vercel.app/listing/?lastValue=15");
+      const data = await response.json();
+      allListings = data.listings; // تخزين جميع القوائم
+      renderListings(allListings); // عرض جميع القوائم
   } catch (error) {
-    console.error("Error loading listings:", error);
-    toast.error("Failed to load listings");
-    listingsTableBody.innerHTML = `
-      <tr>
-        <td colspan="7" class="vr-table__empty">
-          Failed to load listings. Please try again.
-        </td>
-      </tr>
-    `;
+      console.error("Error loading listings:", error);
+      toast.error("Failed to load listings");
   }
 }
-
 async function handleListingSubmit(e) {
   e.preventDefault();
 
@@ -331,18 +416,20 @@ async function deleteListing(id) {
 
 async function viewListing(id) {
   try {
-      // Fetch listing details from the API
-      const response = await fetch(`https://virlo.vercel.app/listing/${id}`);
-      const listing = await response.json();
-      console.log(listing);
+    // Fetch listing details from the API
+    const response = await fetch(`https://virlo.vercel.app/listing/${id}`);
+    const listing = await response.json();
+    console.log(listing);
 
-      // Fill the modal with listing details
-      const modalContent = document.getElementById("viewListingContent");
-      modalContent.innerHTML = `
+    // Fill the modal with listing details
+    const modalContent = document.getElementById("viewListingContent");
+    modalContent.innerHTML = `
           <div class="listing-details">
               <div class="listing-header">
                   <h2 class="listing-title">${listing.listingName}</h2>
-                  <span class="listing-status ${listing.isActive ? "active" : "inactive"}">
+                  <span class="listing-status ${
+                    listing.isActive ? "active" : "inactive"
+                  }">
                       ${listing.isActive ? "Active" : "Inactive"}
                   </span>
               </div>
@@ -350,26 +437,34 @@ async function viewListing(id) {
                   <div class="info-item">
                       <span class="info-label">Category:</span>
                       <span class="info-value">${
-                          listing.categoryId
-                              ? listing.categoryId.categoryName
-                              : "Uncategorized"
+                        listing.categoryId
+                          ? listing.categoryId.categoryName
+                          : "Uncategorized"
                       }</span>
                   </div>
                   <div class="info-item">
                       <span class="info-label">Location:</span>
-                      <span class="info-value">${listing.location || "Unknown"}</span>
+                      <span class="info-value">${
+                        listing.location || "Unknown"
+                      }</span>
                   </div>
                   <div class="info-item">
                       <span class="info-label">Email:</span>
-                      <span class="info-value">${listing.email || "No email provided"}</span>
+                      <span class="info-value">${
+                        listing.email || "No email provided"
+                      }</span>
                   </div>
                   <div class="info-item">
                       <span class="info-label">Mobile:</span>
-                      <span class="info-value">${listing.mobile || "No mobile provided"}</span>
+                      <span class="info-value">${
+                        listing.mobile || "No mobile provided"
+                      }</span>
                   </div>
                   <div class="info-item">
                       <span class="info-label">Created At:</span>
-                      <span class="info-value">${formatDate(listing.createdAt)}</span>
+                      <span class="info-value">${formatDate(
+                        listing.createdAt
+                      )}</span>
                   </div>
               </div>
               <div class="listing-description">
@@ -380,45 +475,47 @@ async function viewListing(id) {
                   <h3>Opening Times</h3>
                   <ul>
                       ${Object.entries(listing.openingTimes || {})
-                          .map(
-                              ([day, times]) => `
+                        .map(
+                          ([day, times]) => `
                           <li>
                               <span class="day">${day}:</span>
                               <span class="time">${
-                                  times.status === "open"
-                                      ? `${times.from} - ${times.to}`
-                                      : "Closed"
+                                times.status === "open"
+                                  ? `${times.from} - ${times.to}`
+                                  : "Closed"
                               }</span>
                           </li>
                       `
-                          )
-                          .join("")}
+                        )
+                        .join("")}
                   </ul>
               </div>
           </div>
       `;
 
-      // Show the modal using Bootstrap
-      const viewModal = new bootstrap.Modal(document.getElementById('viewListingModal'));
-      viewModal.show();
+    // Show the modal using Bootstrap
+    const viewModal = new bootstrap.Modal(
+      document.getElementById("viewListingModal")
+    );
+    viewModal.show();
   } catch (error) {
-      console.error("Error loading listing details:", error);
-      toast.error("Failed to load listing details");
+    console.error("Error loading listing details:", error);
+    toast.error("Failed to load listing details");
   }
 }
 // Filters and Search
-function applyFilters() {
-  const filters = {
-    status: statusFilter.value,
-    category: categoryFilter.value,
-    dateFrom: dateFrom.value,
-    dateTo: dateTo.value,
-    page: 1,
-  };
+// function applyFilters() {
+//   const filters = {
+//     status: statusFilter.value,
+//     category: categoryFilter.value,
+//     dateFrom: dateFrom.value,
+//     dateTo: dateTo.value,
+//     page: 1,
+//   };
 
-  currentPage = 1;
-  loadListings(filters);
-}
+//   currentPage = 1;
+//   loadListings(filters);
+// }
 
 function handleSearch(e) {
   const searchTerm = e.target.value.trim();
@@ -495,59 +592,31 @@ function formatCurrency(amount) {
 }
 
 function renderListings(listings) {
-  console.log(listings);
+  listingsTableBody.innerHTML = ''; // مسح المحتوى القديم
 
-  if (!listings.length) {
-    listingsTableBody.innerHTML = `
-        <tr>
-          <td colspan="7" class="vr-table__empty">
-            No listings found.
-          </td>
-        </tr>
+  if (listings.length === 0) {
+      listingsTableBody.innerHTML = `
+          <tr>
+              <td colspan="7" class="vr-table__empty">
+                  No listings found.
+              </td>
+          </tr>
       `;
-    return;
+      return;
   }
 
-  listingsTableBody.innerHTML = listings
-    .map(
-      (listing) => `
-          <tr>
-            <td>
-              <div class="vr-listing-info">
-                <div class="vr-listing-details">
-                  <h4 class="vr-listing-title">${listing.listingName}</h4>
-                </div>
-              </div>
-            </td>
-            <td>${
-              listing.categoryId
-                ? listing.categoryId.categoryName
-                : "Uncategorized"
-            }</td>
-            <td>${listing.location || "Unknown"}</td>
-            <td>
-              <span class="vr-badge vr-badge--${
-                listing.isActive ? "active" : "inactive"
-              }">
-                ${listing.isActive ? "active" : "inactive"}
-              </span>
-            </td>
-            <td>${listing.views}</td>
-            <td>${formatDate(
-              listing.createdAt || new Date().toISOString()
-            )}</td>
-            <td>
-              <div class="vr-listing-actions">
-              <button class="vr-action-btn" onclick="showListingModal(${JSON.stringify(listing).replace(/"/g, '&quot;')})" title="View">
-                            <i class="fas fa-eye"></i>
-                        </button>
-             
-              </div>
-            </td>
-          </tr>
-        `
-    )
-    .join("");
+  listings.forEach(listing => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+          <td>${listing.listingName}</td>
+          <td>${listing.categoryId ? listing.categoryId.categoryName : "Uncategorized"}</td>
+          <td>${listing.location || "Unknown"}</td>
+          <td>${listing.isActive ? "Active" : "Inactive"}</td>
+          
+          <td>${new Date(listing.createdAt).toLocaleDateString()}</td>
+      `;
+      listingsTableBody.appendChild(row);
+  });
 }
 // async function viewListing(id) {
 //   try {
@@ -558,7 +627,7 @@ function renderListings(listings) {
 
 //     // Fill the modal with listing details
 //     const modalContent = document.getElementById("viewListingContent");
-    
+
 //     modalContent.innerHTML = `
 //             <div class="listing-details">
 //                 <div class="listing-header">
@@ -641,72 +710,87 @@ function renderListings(listings) {
 
 function showListingModal(listing) {
   // Fill modal with listing data
-  const modalContent = document.getElementById('listingDetailsContent');
+  const modalContent = document.getElementById("listingDetailsContent");
   console.log(modalContent);
-  
+
   modalContent.innerHTML = `
       <div class="listing-details">
           <div class="listing-header">
-              <h2 class="listing-title">${listing.listingName || 'N/A'}</h2>
-              <span class="listing-status ${listing.isActive ? 'active' : 'inactive'}">
-                  ${listing.isActive ? 'Active' : 'Inactive'}
+              <h2 class="listing-title">${listing.listingName || "N/A"}</h2>
+              <span class="listing-status ${
+                listing.isActive ? "active" : "inactive"
+              }">
+                  ${listing.isActive ? "Active" : "Inactive"}
               </span>
           </div>
           <div class="listing-info">
               <div class="info-item">
                   <span class="info-label">Category:</span>
                   <span class="info-value">${
-                      listing.categoryId?.categoryName || 'Uncategorized'
+                    listing.categoryId?.categoryName || "Uncategorized"
                   }</span>
               </div>
               <div class="info-item">
                   <span class="info-label">Location:</span>
-                  <span class="info-value">${listing.location || 'Unknown'}</span>
+                  <span class="info-value">${
+                    listing.location || "Unknown"
+                  }</span>
               </div>
               <div class="info-item">
                   <span class="info-label">Email:</span>
-                  <span class="info-value">${listing.email || 'No email provided'}</span>
+                  <span class="info-value">${
+                    listing.email || "No email provided"
+                  }</span>
               </div>
               <div class="info-item">
                   <span class="info-label">Mobile:</span>
-                  <span class="info-value">${listing.mobile || 'No mobile provided'}</span>
+                  <span class="info-value">${
+                    listing.mobile || "No mobile provided"
+                  }</span>
               </div>
               <div class="info-item">
                   <span class="info-label">Created At:</span>
-                  <span class="info-value">${new Date(listing.createdAt).toLocaleDateString()}</span>
+                  <span class="info-value">${new Date(
+                    listing.createdAt
+                  ).toLocaleDateString()}</span>
               </div>
           </div>
           <div class="listing-description">
               <h3>Description</h3>
-              <p>${listing.description || 'No description available'}</p>
+              <p>${listing.description || "No description available"}</p>
           </div>
           <div class="listing-opening-times">
               <h3>Opening Times</h3>
               <ul>
                   ${Object.entries(listing.openingTimes || {})
-                      .map(([day, times]) => `
+                    .map(
+                      ([day, times]) => `
                           <li>
                               <span class="day">${day}:</span>
                               <span class="time">${
-                                  times.status === 'open'
-                                      ? `${times.from} - ${times.to}`
-                                      : 'Closed'
+                                times.status === "open"
+                                  ? `${times.from} - ${times.to}`
+                                  : "Closed"
                               }</span>
                           </li>
-                      `)
-                      .join('')}
+                      `
+                    )
+                    .join("")}
               </ul>
           </div>
       </div>
   `;
 
   // Show the modal using Bootstrap
-  const listingModal = new bootstrap.Modal(document.getElementById('listingDetailsModal'));
+  const listingModal = new bootstrap.Modal(
+    document.getElementById("listingDetailsModal")
+  );
   listingModal.show();
 }
+
 async function deleteListing(id) {
   console.log(id);
-  
+
   if (!confirm("Are you sure you want to delete this listing?")) {
     return;
   }
