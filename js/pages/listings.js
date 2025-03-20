@@ -39,17 +39,15 @@ $(document).ready(function () {
         first: "الأول",
         last: "الأخير",
         next: "التالي",
-        previous: "السابق"
-      }
+        previous: "السابق",
+      },
     },
-    dom: 'Bfrtip',
-    buttons: [
-      'copy', 'csv', 'excel', 'pdf', 'print'
-    ]
+    dom: "Bfrtip",
+    buttons: ["copy", "csv", "excel", "pdf", "print"],
   });
 
   // Add search functionality to the custom search input
-  $(".vr-admin-header__search input").on('keyup', function() {
+  $(".vr-admin-header__search input").on("keyup", function () {
     table.search(this.value).draw();
   });
 });
@@ -64,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
   loadListings();
   setupEventListeners();
   const apply = document.getElementById("apply");
-    apply.addEventListener("click", applyFilters);
+  apply.addEventListener("click", applyFilters);
 });
 
 function handleSearch(e) {
@@ -81,17 +79,13 @@ function setupEventListeners() {
     selectedImages = [];
     listingModal.setTitle("Add New Listing");
     listingModal.show();
-    document
-      .getElementById("apply")
-      .addEventListener("click", applyFilters);
+    document.getElementById("apply").addEventListener("click", applyFilters);
   });
-
   function applyFilters() {
     // جمع قيم الفلترة من الفورم
     const statusValue = document.getElementById("statusFilter").value;
-    const categoryId = document.getElementById("categoryFilter").value; // الحصول على الـ ID المختار
-    const dateFromValue = document.getElementById("dateFrom").value;
-    const dateToValue = document.getElementById("dateTo").value;
+    const categoryValue = document.getElementById("categoryFilter").value;
+    const locationValue = document.getElementById("locationFilter").value.trim().toLowerCase();
 
     // تصفية البيانات بناءً على القيم المحددة
     const filteredListings = allListings.filter(listing => {
@@ -99,16 +93,17 @@ function setupEventListeners() {
         const statusMatch = statusValue ? listing.isActive === (statusValue === "active") : true;
 
         // فلترة الفئة (Category)
-        const categoryMatch = categoryId ? listing.categoryId === categoryId : true;
+        const categoryMatch = categoryValue
+            ? listing.categoryId?.categoryName === categoryValue
+            : true;
 
-        // فلترة نطاق التاريخ (Date Range)
-        const listingDate = new Date(listing.createdAt).getTime();
-        const fromDate = dateFromValue ? new Date(dateFromValue).getTime() : null;
-        const toDate = dateToValue ? new Date(dateToValue).getTime() : null;
-        const dateMatch = (fromDate ? listingDate >= fromDate : true) && (toDate ? listingDate <= toDate : true);
+        // فلترة الموقع (Location)
+        const locationMatch = locationValue
+            ? listing.location?.toLowerCase().includes(locationValue)
+            : true;
 
         // إرجاع العناصر التي تطابق جميع الشروط
-        return statusMatch && categoryMatch && dateMatch;
+        return statusMatch && categoryMatch && locationMatch;
     });
 
     // عرض البيانات المصفاة
@@ -194,13 +189,13 @@ function setupEventListeners() {
 
 async function fetchCategories() {
   try {
-      const response = await fetch("https://virlo.vercel.app/categories");
-      const data = await response.json();
-      console.log(data); // تحقق من البيانات هنا
-      populateCategoryFilter(data); // تعبئة القائمة المنسدلة بالبيانات
+    const response = await fetch("https://virlo.vercel.app/categories");
+    const data = await response.json();
+    console.log(data); // تحقق من البيانات هنا
+    populateCategoryFilter(data); // تعبئة القائمة المنسدلة بالبيانات
   } catch (error) {
-      console.error("Error fetching categories:", error);
-      toast.error("Failed to fetch categories");
+    console.error("Error fetching categories:", error);
+    toast.error("Failed to fetch categories");
   }
 }
 function populateCategoryFilter(categories) {
@@ -210,11 +205,11 @@ function populateCategoryFilter(categories) {
   categoryFilter.innerHTML = '<option value="">All Categories</option>';
 
   // إضافة الخيارات الجديدة بناءً على البيانات
-  categories.forEach(category => {
-      const option = document.createElement('option');
-      option.value = category._id; // استخدام الـ ID كقيمة
-      option.textContent = category.categoryName; // استخدام اسم الفئة كنص
-      categoryFilter.appendChild(option);
+  categories.forEach((category) => {
+    const option = document.createElement("option");
+    option.value = category._id; // استخدام الـ ID كقيمة
+    option.textContent = category.categoryName; // استخدام اسم الفئة كنص
+    categoryFilter.appendChild(option);
   });
 }
 // دالة لجلب إحصائيات الـ listings
@@ -305,13 +300,15 @@ const listingsPerPage = 10; // عدد العناصر في كل صفحة
 
 async function loadListings() {
   try {
-      const response = await fetch("https://virlo.vercel.app/listing/?lastValue=15");
-      const data = await response.json();
-      allListings = data.listings; // تخزين جميع القوائم
-      renderListings(allListings); // عرض جميع القوائم
+    const response = await fetch(
+      "https://virlo.vercel.app/listing/?lastValue=15"
+    );
+    const data = await response.json();
+    allListings = data.listings; // تخزين جميع القوائم
+    renderListings(allListings); // عرض جميع القوائم
   } catch (error) {
-      console.error("Error loading listings:", error);
-      toast.error("Failed to load listings");
+    console.error("Error loading listings:", error);
+    toast.error("Failed to load listings");
   }
 }
 async function handleListingSubmit(e) {
@@ -600,24 +597,24 @@ function formatCurrency(amount) {
 }
 
 function renderListings(listings) {
-    if (!listings.length) {
-        listingsTableBody.innerHTML = `
+  if (!listings.length) {
+    listingsTableBody.innerHTML = `
             <tr>
                 <td colspan="7" class="vr-table__empty">
                     No listings found.
                 </td>
             </tr>
         `;
-        return;
-    }
+    return;
+  }
 
-    // Clear the table body
-    listingsTableBody.innerHTML = '';
+  // Clear the table body
+  listingsTableBody.innerHTML = "";
 
-    // Add data to the table
-    listings.forEach(listing => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
+  // Add data to the table
+  listings.forEach((listing) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
             <td>
                 <div class="vr-listing-info">
                     <div class="vr-listing-details">
@@ -625,28 +622,40 @@ function renderListings(listings) {
                     </div>
                 </div>
             </td>
-            <td>${listing.categoryId ? listing.categoryId.categoryName : "Uncategorized"}</td>
+            <td>${
+              listing.categoryId
+                ? listing.categoryId.categoryName
+                : "Uncategorized"
+            }</td>
             <td>${listing.location || "Unknown"}</td>
             <td>
-                <span class="vr-badge vr-badge--${listing.isActive ? "active" : "inactive"}">
+                <span class="vr-badge vr-badge--${
+                  listing.isActive ? "active" : "inactive"
+                }">
                     ${listing.isActive ? "active" : "inactive"}
                 </span>
             </td>
             <td>${listing.views}</td>
-            <td>${formatDate(listing.createdAt || new Date().toISOString())}</td>
+            <td>${formatDate(
+              listing.createdAt || new Date().toISOString()
+            )}</td>
             <td>
                 <div class="vr-listing-actions">
-                    <button class="vr-action-btn" onclick="showListingModal(${JSON.stringify(listing).replace(/"/g, '&quot;')})" title="View">
+                    <button class="vr-action-btn" onclick="showListingModal(${JSON.stringify(
+                      listing
+                    ).replace(/"/g, "&quot;")})" title="View">
                         <i class="fas fa-eye"></i>
                     </button>
-                    <button class="vr-action-btn" onclick="editListing('${listing._id}')" title="Edit">
+                    <button class="vr-action-btn" onclick="editListing('${
+                      listing._id
+                    }')" title="Edit">
                         <i class="fas fa-edit"></i>
                     </button>
                 </div>
             </td>
         `;
-        listingsTableBody.appendChild(row);
-    });
+    listingsTableBody.appendChild(row);
+  });
 }
 // async function viewListing(id) {
 //   try {
@@ -736,7 +745,6 @@ function renderListings(listings) {
 //     toast.error("Failed to load listing details");
 //   }
 // }
-
 
 function showListingModal(listing) {
   // Fill modal with listing data
@@ -875,8 +883,8 @@ async function deleteListing(id) {
 
 // Add this new function to handle edit action
 function editListing(id) {
-    // Store the listing ID in localStorage
-    localStorage.setItem('editingListingId', id);
-    // Redirect to edit page
-    window.location.href = 'edit-listing.html';
+  // Store the listing ID in localStorage
+  localStorage.setItem("editingListingId", id);
+  // Redirect to edit page
+  window.location.href = "edit-listing.html";
 }
