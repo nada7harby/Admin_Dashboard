@@ -66,18 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const apply = document.getElementById("apply");
     apply.addEventListener("click", applyFilters);
 });
-// function applyFilters() {
-//   const filters = {
-//     status: statusFilter.value,
-//     category: categoryFilter.value,
-//     dateFrom: dateFrom.value,
-//     dateTo: dateTo.value,
-//     page: 1, // العودة إلى الصفحة الأولى عند تطبيق الفلترة
-//   };
 
-//   currentPage = 1;
-//   loadListings(filters);
-// }
 function handleSearch(e) {
   const searchTerm = e.target.value.trim();
   currentPage = 1; // العودة إلى الصفحة الأولى عند البحث
@@ -100,22 +89,26 @@ function setupEventListeners() {
   function applyFilters() {
     // جمع قيم الفلترة من الفورم
     const statusValue = document.getElementById("statusFilter").value;
-    const locationValue = document.getElementById("locationFilter").value.trim().toLowerCase();
-    const categoryValue = document.getElementById("categoryFilter").value;
+    const categoryId = document.getElementById("categoryFilter").value; // الحصول على الـ ID المختار
+    const dateFromValue = document.getElementById("dateFrom").value;
+    const dateToValue = document.getElementById("dateTo").value;
 
     // تصفية البيانات بناءً على القيم المحددة
     const filteredListings = allListings.filter(listing => {
         // فلترة الحالة (Status)
         const statusMatch = statusValue ? listing.isActive === (statusValue === "active") : true;
 
-        // فلترة الموقع (Location)
-        const locationMatch = locationValue ? listing.location?.toLowerCase().includes(locationValue) : true;
-
         // فلترة الفئة (Category)
-        const categoryMatch = categoryValue ? listing.categoryId?.categoryName === categoryValue : true;
+        const categoryMatch = categoryId ? listing.categoryId === categoryId : true;
+
+        // فلترة نطاق التاريخ (Date Range)
+        const listingDate = new Date(listing.createdAt).getTime();
+        const fromDate = dateFromValue ? new Date(dateFromValue).getTime() : null;
+        const toDate = dateToValue ? new Date(dateToValue).getTime() : null;
+        const dateMatch = (fromDate ? listingDate >= fromDate : true) && (toDate ? listingDate <= toDate : true);
 
         // إرجاع العناصر التي تطابق جميع الشروط
-        return statusMatch && locationMatch && categoryMatch;
+        return statusMatch && categoryMatch && dateMatch;
     });
 
     // عرض البيانات المصفاة
@@ -198,7 +191,34 @@ function setupEventListeners() {
 //         `;
 //   }
 // }
+
+async function fetchCategories() {
+  try {
+      const response = await fetch("https://virlo.vercel.app/categories");
+      const data = await response.json();
+      console.log(data); // تحقق من البيانات هنا
+      populateCategoryFilter(data); // تعبئة القائمة المنسدلة بالبيانات
+  } catch (error) {
+      console.error("Error fetching categories:", error);
+      toast.error("Failed to fetch categories");
+  }
+}
+function populateCategoryFilter(categories) {
+  const categoryFilter = document.getElementById("categoryFilter");
+
+  // مسح الخيارات الحالية (إن وجدت)
+  categoryFilter.innerHTML = '<option value="">All Categories</option>';
+
+  // إضافة الخيارات الجديدة بناءً على البيانات
+  categories.forEach(category => {
+      const option = document.createElement('option');
+      option.value = category._id; // استخدام الـ ID كقيمة
+      option.textContent = category.categoryName; // استخدام اسم الفئة كنص
+      categoryFilter.appendChild(option);
+  });
+}
 // دالة لجلب إحصائيات الـ listings
+
 async function fetchListingsStats() {
   try {
     const response = await fetch(
@@ -238,6 +258,7 @@ async function fetchListingsStats() {
 // استدعاء الدالة عند تحميل الصفحة
 document.addEventListener("DOMContentLoaded", () => {
   fetchListingsStats();
+  fetchCategories();
 });
 let allListings = []; // تخزين جميع القوائم
 let currentPage = 1; // الصفحة الحالية
@@ -503,19 +524,6 @@ async function viewListing(id) {
     toast.error("Failed to load listing details");
   }
 }
-// Filters and Search
-// function applyFilters() {
-//   const filters = {
-//     status: statusFilter.value,
-//     category: categoryFilter.value,
-//     dateFrom: dateFrom.value,
-//     dateTo: dateTo.value,
-//     page: 1,
-//   };
-
-//   currentPage = 1;
-//   loadListings(filters);
-// }
 
 function handleSearch(e) {
   const searchTerm = e.target.value.trim();
@@ -592,31 +600,53 @@ function formatCurrency(amount) {
 }
 
 function renderListings(listings) {
-  listingsTableBody.innerHTML = ''; // مسح المحتوى القديم
+    if (!listings.length) {
+        listingsTableBody.innerHTML = `
+            <tr>
+                <td colspan="7" class="vr-table__empty">
+                    No listings found.
+                </td>
+            </tr>
+        `;
+        return;
+    }
 
-  if (listings.length === 0) {
-      listingsTableBody.innerHTML = `
-          <tr>
-              <td colspan="7" class="vr-table__empty">
-                  No listings found.
-              </td>
-          </tr>
-      `;
-      return;
-  }
+    // Clear the table body
+    listingsTableBody.innerHTML = '';
 
-  listings.forEach(listing => {
-      const row = document.createElement('tr');
-      row.innerHTML = `
-          <td>${listing.listingName}</td>
-          <td>${listing.categoryId ? listing.categoryId.categoryName : "Uncategorized"}</td>
-          <td>${listing.location || "Unknown"}</td>
-          <td>${listing.isActive ? "Active" : "Inactive"}</td>
-          
-          <td>${new Date(listing.createdAt).toLocaleDateString()}</td>
-      `;
-      listingsTableBody.appendChild(row);
-  });
+    // Add data to the table
+    listings.forEach(listing => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>
+                <div class="vr-listing-info">
+                    <div class="vr-listing-details">
+                        <h4 class="vr-listing-title">${listing.listingName}</h4>
+                    </div>
+                </div>
+            </td>
+            <td>${listing.categoryId ? listing.categoryId.categoryName : "Uncategorized"}</td>
+            <td>${listing.location || "Unknown"}</td>
+            <td>
+                <span class="vr-badge vr-badge--${listing.isActive ? "active" : "inactive"}">
+                    ${listing.isActive ? "active" : "inactive"}
+                </span>
+            </td>
+            <td>${listing.views}</td>
+            <td>${formatDate(listing.createdAt || new Date().toISOString())}</td>
+            <td>
+                <div class="vr-listing-actions">
+                    <button class="vr-action-btn" onclick="showListingModal(${JSON.stringify(listing).replace(/"/g, '&quot;')})" title="View">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                    <button class="vr-action-btn" onclick="editListing('${listing._id}')" title="Edit">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                </div>
+            </td>
+        `;
+        listingsTableBody.appendChild(row);
+    });
 }
 // async function viewListing(id) {
 //   try {
@@ -841,4 +871,12 @@ async function deleteListing(id) {
       deleteBtn.disabled = false;
     }
   }
+}
+
+// Add this new function to handle edit action
+function editListing(id) {
+    // Store the listing ID in localStorage
+    localStorage.setItem('editingListingId', id);
+    // Redirect to edit page
+    window.location.href = 'edit-listing.html';
 }

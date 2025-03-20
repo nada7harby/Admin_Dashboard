@@ -1,5 +1,4 @@
 /* Import Variables */
-@import url('./variables.css');
 
 /* Import Base Styles */
 @import url('./base.css');
@@ -17,6 +16,7 @@
 @import url('./pages/login.css');
 @import url('./pages/users.css');
 
+@import url('./variables.css');
 /* Admin-specific Variables */
 :root {
     --vr-admin-sidebar-width: 260px;
@@ -223,16 +223,21 @@
     border-radius: var(--vr-radius-md);
     font-size: var(--vr-text-sm);
     font-weight: var(--vr-font-medium);
+
     cursor: pointer;
     /*  */
     border: none;
+    
 }
 
 .vr-btn--primary {
-    background: var(--vr-primary);
+    background: #056d3e;
     color: var(--vr-light);
 }
+.vr-btn-outline{
+    border:2px solid #056d3e;
 
+}
 .vr-btn--primary:hover {
     background: var(--vr-primary-dark);
 }
@@ -491,4 +496,50 @@
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     background-color: #f8f9fa;
+}
+
+/* Opening Times Styles */
+.vr-opening-time-item {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.vr-opening-time-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.vr-opening-time-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.vr-opening-time-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.vr-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.vr-checkbox input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.vr-checkbox span {
+    font-size: 14px;
+    color: #666;
 }
