@@ -20,26 +20,26 @@ let totalPages = 10;
 let editingPlanId = null;
 
 // Check Authentication
-async function checkAuth() {
-    try {
-        const isAuthenticated = await authService.isAuthenticated();
-        if (!isAuthenticated) {
-            toast.error('Please login to access this page');
-            setTimeout(() => {
-                window.location.href = './login.html';
-            }, 1500);
-            return false;
-        }
-        return true;
-    } catch (error) {
-        console.error('Auth check failed:', error);
-        toast.error('Authentication check failed');
-        setTimeout(() => {
-            window.location.href = './login.html';
-        }, 1500);
-        return false;
-    }
-}
+// async function checkAuth() {
+//     try {
+//         const isAuthenticated = await authService.isAuthenticated();
+//         if (!isAuthenticated) {
+//             toast.error('Please login to access this page');
+//             setTimeout(() => {
+//                 window.location.href = './login.html';
+//             }, 1500);
+//             return false;
+//         }
+//         return true;
+//     } catch (error) {
+//         console.error('Auth check failed:', error);
+//         toast.error('Authentication check failed');
+//         setTimeout(() => {
+//             window.location.href = './login.html';
+//         }, 1500);
+//         return false;
+//     }
+// }
 
 // Event Listeners
 document.addEventListener('DOMContentLoaded', async () => {

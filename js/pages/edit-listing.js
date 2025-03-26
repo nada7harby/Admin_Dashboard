@@ -23,11 +23,25 @@ const daysOfWeek = [
 // Load categories
 async function loadCategories() {
     try {
-        const response = await fetch("https://virlo.vercel.app/category");
-        const data = await response.json();
+        const myHeaders = new Headers();
+        myHeaders.append("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibW9tZW4iLCJlbWFpbCI6Im1vbWVuc2FsZWgyNDY4QGdtYWlsLmNvbSIsInVzZXJJZCI6IjY3YTg5OWY1MTkwOWJjNjBjY2RjMjZhNyIsImlhdCI6MTczOTIwMTU0OX0.ZECKy5Bag0hPSphNaJlsI5zshlIx11l9FNu0RmbXg_g");
         
+        const requestOptions = {
+            method: "GET",
+            headers: myHeaders,
+            redirect: "follow"
+        };
+
+        const response = await fetch("https://virlo.vercel.app/categories", requestOptions);
+        const data = await response.json();
+
+        // تحقق من هيكل البيانات المتوقع
+        if (!Array.isArray(data)) {
+            throw new Error("Invalid data format: Expected array");
+        }
+
         categorySelect.innerHTML = '<option value="">Select Category</option>';
-        data.categories.forEach(category => {
+        data.forEach(category => {
             categorySelect.innerHTML += `
                 <option value="${category._id}">${category.categoryName}</option>
             `;
@@ -37,7 +51,6 @@ async function loadCategories() {
         toast.error("Failed to load categories");
     }
 }
-
 // Create opening times inputs
 function createOpeningTimesInputs(openingTimes = {}) {
     openingTimesContainer.innerHTML = '';
@@ -143,21 +156,23 @@ async function handleSubmit(e) {
             };
         });
 
-        // Get token
-        const token = localStorage.getItem("adminToken") || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InN1cGVyIiwidXNlcklkIjoiNjdiMzdmMmYxYmE1NDAxM2JlZGI2NGM2IiwicGVybWlzc2lvbnMiOltdLCJpc1N1cGVyQWRtaW4iOnRydWUsImlhdCI6MTc0MTg1NzYzM30.xLPmPe0VsiTp9sPgRowBWrcuRg7kialtiEMBgd3PWC0";
+        // Prepare headers
+        const myHeaders = new Headers();
+        myHeaders.append("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibW9tZW4iLCJlbWFpbCI6Im1vbWVuc2FsZWgyNDY4QGdtYWlsLmNvbSIsInVzZXJJZCI6IjY3YTg5OWY1MTkwOWJjNjBjY2RjMjZhNyIsImlhdCI6MTczOTIwMTU0OX0.ZECKy5Bag0hPSphNaJlsI5zshlIx11l9FNu0RmbXg_g");
+        myHeaders.append("Content-Type", "application/json");
 
         // Send update request
         const response = await fetch(`https://virlo.vercel.app/listing/${listingId}`, {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-                "token": token
-            },
-            body: JSON.stringify(listingData)
+            method: "PUT",
+            headers: myHeaders,
+            body: JSON.stringify(listingData),
+            redirect: "follow"
         });
 
+        const result = await response.json();
+
         if (!response.ok) {
-            throw new Error("Failed to update listing");
+            throw new Error(result.message || "Failed to update listing");
         }
 
         toast.success("Listing updated successfully");
@@ -166,12 +181,13 @@ async function handleSubmit(e) {
         }, 1500);
     } catch (error) {
         console.error("Error updating listing:", error);
-        toast.error("Failed to update listing");
+        toast.error(error.message || "Failed to update listing");
     } finally {
         const submitBtn = editListingForm.querySelector('button[type="submit"]');
         submitBtn.classList.remove("loading");
     }
 }
+
 
 // Initialize page
 document.addEventListener("DOMContentLoaded", () => {
@@ -184,4 +200,4 @@ document.addEventListener("DOMContentLoaded", () => {
     loadCategories();
     loadListingData();
     editListingForm.addEventListener("submit", handleSubmit);
-}); 
+});

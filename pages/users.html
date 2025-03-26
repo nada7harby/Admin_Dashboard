@@ -60,57 +60,41 @@
         <div class="vr-stats-grid">
           <div class="vr-stat-card">
             <div class="vr-stat-card__icon">
-                <i class="fas fa-users"></i>
+              <i class="fas fa-users"></i>
             </div>
             <div class="vr-stat-card__content">
-                <div class="vr-stat-card__title">Total Admins</div>
-                <div class="vr-stat-card__value" id="totalAdmins">Loading...</div>
-                <div class="vr-stat-card__change">
-                    <i class="fas fa-arrow-up"></i>
-                    <span>8% from last month</span>
-                </div>
+              <div class="vr-stat-card__title">Total Admins</div>
+              <div class="vr-stat-card__value" id="totalAdmins">Loading...</div>
             </div>
-        </div>
-
+          </div>
+        
           <div class="vr-stat-card">
             <div class="vr-stat-card__icon">
               <i class="fas fa-user-check"></i>
             </div>
             <div class="vr-stat-card__content">
-              <div class="vr-stat-card__title">Active Users</div>
-              <div class="vr-stat-card__value">4,800</div>
-              <div class="vr-stat-card__change">
-                <i class="fas fa-arrow-up"></i>
-                <span>5% from last month</span>
-              </div>
+              <div class="vr-stat-card__title">Super Admins</div>
+              <div class="vr-stat-card__value" id="superAdmins">Loading...</div>
             </div>
           </div>
-
-          <div class="vr-stat-card">
-            <div class="vr-stat-card__icon">
-              <i class="fas fa-user-clock"></i>
-            </div>
-            <div class="vr-stat-card__content">
-              <div class="vr-stat-card__title">Pending Approval</div>
-              <div class="vr-stat-card__value">45</div>
-              <div class="vr-stat-card__change">
-                <i class="fas fa-arrow-down"></i>
-                <span>3% from last month</span>
-              </div>
-            </div>
-          </div>
-
+        
           <div class="vr-stat-card">
             <div class="vr-stat-card__icon">
               <i class="fas fa-user-shield"></i>
             </div>
             <div class="vr-stat-card__content">
-              <div class="vr-stat-card__title">Admin Users</div>
-              <div class="vr-stat-card__value">12</div>
-              <div class="vr-stat-card__change">
-                <i class="fas fa-arrow-up"></i>
-                <span>2 new this month</span>
-              </div>
+              <div class="vr-stat-card__title">Regular Admins</div>
+              <div class="vr-stat-card__value" id="regularAdmins">Loading...</div>
+            </div>
+          </div>
+        
+          <div class="vr-stat-card">
+            <div class="vr-stat-card__icon">
+              <i class="fas fa-user-clock"></i>
+            </div>
+            <div class="vr-stat-card__content">
+              <div class="vr-stat-card__title">Admins with Permissions</div>
+              <div class="vr-stat-card__value" id="adminsWithPermissions">Loading...</div>
             </div>
           </div>
         </div>
@@ -132,7 +116,7 @@
               <select class="vr-input" id="roleFilter">
                 <option value="">All Roles</option>
                 <option value="admin">Admin</option>
-                <option value="user">User</option>
+                <option value="user">Super Admin</option>
                 <option value="moderator">Moderator</option>
               </select>
             </div>
@@ -169,9 +153,8 @@
                 <tr>
                   <th>User</th>
                   <th>Role</th>
-                  <th>Email</th>
-                  <th>Status</th>
                   <th>Joined</th>
+                  <th>Status</th>
                   <th>Actions</th>
                 </tr>
               </thead>
