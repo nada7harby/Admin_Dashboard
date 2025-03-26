@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Listing - Admin Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="vr-admin-container">
+        <!-- Sidebar -->
+        <div class="vr-admin-sidebar">
+            <div class="vr-admin-sidebar__header">
+                <img src="images/logo.png" alt="Logo" class="vr-admin-sidebar__logo">
+            </div>
+            <nav class="vr-admin-sidebar__nav">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="listings.html" class="active"><i class="fas fa-list"></i> Listings</a></li>
+                    <li><a href="categories.html"><i class="fas fa-tags"></i> Categories</a></li>
+                    <li><a href="users.html"><i class="fas fa-users"></i> Users</a></li>
+                    <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="vr-admin-main">
+            <header class="vr-admin-header">
+                <div class="vr-admin-header__search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search...">
+                </div>
+                <div class="vr-admin-header__user">
+                    <img src="images/avatar.png" alt="User Avatar" class="vr-admin-header__avatar">
+                    <span class="vr-admin-header__name">Admin</span>
+                </div>
+            </header>
+
+            <main class="vr-admin-content">
+                <div class="vr-admin-content__header">
+                    <h1>Add New Listing</h1>
+                    <button class="vr-btn vr-btn--secondary" onclick="window.location.href='listings.html'">
+                        <i class="fas fa-arrow-left"></i> Back to Listings
+                    </button>
+                </div>
+
+                <div class="vr-admin-content__body">
+                    <form id="addListingForm" class="vr-form">
+                        <div class="vr-form__group">
+                            <label for="listingName">Listing Name</label>
+                            <input type="text" id="listingName" name="listingName" required>
+                        </div>
+
+                        <div class="vr-form__group">
+                            <label for="categoryId">Category</label>
+                            <select id="categoryId" name="categoryId" required>
+                                <option value="">Select Category</option>
+                            </select>
+                        </div>
+
+                        <div class="vr-form__group">
+                            <label for="location">Location</label>
+                            <input type="text" id="location" name="location" required>
+                        </div>
+
+                        <div class="vr-form__group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="vr-form__group">
+                            <label for="mobile">Mobile</label>
+                            <input type="tel" id="mobile" name="mobile" required>
+                        </div>
+
+                        <div class="vr-form__group">
+                            <label for="description">Description</label>
+                            <textarea id="description" name="description" rows="4" required></textarea>
+                        </div>
+
+                        <div class="vr-form__group">
+                            <label for="mainImage">Main Image</label>
+                            <input type="file" id="mainImage" name="mainImage" accept="image/*" required>
+                            <div id="imagePreview" class="vr-image-preview"></div>
+                        </div>
+
+                        <div class="vr-form__group">
+                            <label>Opening Times</label>
+                            <div class="vr-opening-times">
+                                <div class="vr-opening-times__header">
+                                    <span>Day</span>
+                                    <span>Status</span>
+                                    <span>From</span>
+                                    <span>To</span>
+                                </div>
+                                <div id="openingTimesContainer">
+                                    <!-- Opening times will be added here dynamically -->
+                                </div>
+                                <button type="button" class="vr-btn vr-btn--secondary" onclick="addOpeningTime()">
+                                    <i class="fas fa-plus"></i> Add Time
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="vr-form__group">
+                            <label class="vr-checkbox">
+                                <input type="checkbox" id="isActive" name="isActive" checked>
+                                <span>Active Listing</span>
+                            </label>
+                        </div>
+
+                        <div class="vr-form__actions">
+                            <button type="submit" class="vr-btn vr-btn--primary">
+                                <i class="fas fa-save"></i> Save Listing
+                            </button>
+                            <button type="button" class="vr-btn vr-btn--secondary" onclick="window.location.href='listings.html'">
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="js/add-listing.js"></script>
+</body>
+</html> 

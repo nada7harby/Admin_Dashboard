@@ -217,8 +217,9 @@
             <i class="fas fa-times"></i>
           </button>
         </div>
-
-        <form id="listingForm" class="vr-modal__content">
+    
+        <form id="addListingForm" class="vr-modal__content">
+          <!-- Basic Information -->
           <div class="vr-form-group">
             <label for="listingTitle" class="vr-label">Listing Title</label>
             <input
@@ -229,37 +230,94 @@
               required
             />
           </div>
-
+    
           <div class="vr-form-group">
-            <label for="listingCategory" class="vr-label">Category</label>
+            <label for="categoryId" class="vr-label">Category</label>
             <select
-              id="listingCategory"
-              name="category"
+              id="categoryId"
+              name="categoryId"
               class="vr-input"
               required
             >
               <option value="">Select Category</option>
-              <option value="real-estate">Real Estate</option>
-              <option value="vehicles">Vehicles</option>
-              <option value="jobs">Jobs</option>
-              <option value="services">Services</option>
+              <!-- Categories will be loaded dynamically -->
             </select>
           </div>
-
+    
+          <!-- Location Information -->
           <div class="vr-form-group">
-            <label for="listingPrice" class="vr-label">Price</label>
-            <div class="vr-input-group">
-              <span class="vr-input-group__addon">$</span>
-              <input
-                type="number"
-                id="listingPrice"
-                name="price"
-                class="vr-input"
-                required
-              />
+            <label for="listingLocation" class="vr-label">Location</label>
+            <input
+              type="text"
+              id="listingLocation"
+              name="location"
+              class="vr-input"
+              required
+            />
+          </div>
+    
+          <div class="vr-row">
+            <div class="vr-col-6">
+              <div class="vr-form-group">
+                <label for="listingLongitude" class="vr-label">Longitude</label>
+                <input
+                  type="text"
+                  id="listingLongitude"
+                  name="longitude"
+                  class="vr-input"
+                  required
+                />
+              </div>
+            </div>
+            <div class="vr-col-6">
+              <div class="vr-form-group">
+                <label for="listingLatitude" class="vr-label">Latitude</label>
+                <input
+                  type="text"
+                  id="listingLatitude"
+                  name="latitude"
+                  class="vr-input"
+                  required
+                />
+              </div>
             </div>
           </div>
-
+    
+          <!-- Contact Information -->
+          <div class="vr-form-group">
+            <label for="listingEmail" class="vr-label">Email</label>
+            <input
+              type="email"
+              id="listingEmail"
+              name="email"
+              class="vr-input"
+              required
+            />
+          </div>
+    
+          <div class="vr-form-group">
+            <label for="listingMobile" class="vr-label">Mobile</label>
+            <input
+              type="text"
+              id="listingMobile"
+              name="mobile"
+              class="vr-input"
+              required
+            />
+          </div>
+    
+          <div class="vr-form-group">
+            <label for="listingTaxNumber" class="vr-label">Tax Number</label>
+            <input
+              type="text"
+              id="listingTaxNumber"
+              name="taxNumber"
+              class="vr-input"
+              required
+            />
+          </div>
+    
+          <!-- Description -->
           <div class="vr-form-group">
             <label for="listingDescription" class="vr-label">Description</label>
             <textarea
@@ -270,22 +328,58 @@
               required
             ></textarea>
           </div>
-
+    
+          <!-- Images -->
           <div class="vr-form-group">
-            <label for="listingImages" class="vr-label">Images</label>
+            <label for="mainImage" class="vr-label">Main Image</label>
             <div class="vr-image-upload">
               <input
                 type="file"
-                id="listingImages"
-                name="images"
-                multiple
+                id="mainImage"
+                name="mainImage"
                 accept="image/*"
                 class="vr-input"
+                required
               />
               <div class="vr-image-preview" id="imagePreview"></div>
             </div>
           </div>
-
+    
+          <div class="vr-form-group">
+            <label for="galleryImages" class="vr-label">Gallery Images</label>
+            <div class="vr-image-upload">
+              <input
+                type="file"
+                id="galleryImages"
+                name="galleryImages"
+                multiple
+                accept="image/*"
+                class="vr-input"
+              />
+              <div class="vr-gallery-preview" id="galleryPreview"></div>
+            </div>
+          </div>
+    
+          <!-- Items -->
+          <div class="vr-form-group">
+            <label class="vr-label">Items</label>
+            <div id="itemsContainer">
+              <!-- Items will be added here dynamically -->
+            </div>
+            <button type="button" class="vr-btn vr-btn--secondary" onclick="addNewItem()">
+              <i class="fas fa-plus"></i> Add Item
+            </button>
+          </div>
+    
+          <!-- Opening Times -->
+          <div class="vr-form-group">
+            <label class="vr-label">Opening Times</label>
+            <div id="openingTimesContainer">
+              <!-- Opening times will be added here dynamically -->
+            </div>
+          </div>
+    
+          <!-- Status -->
           <div class="vr-form-group">
             <label for="listingStatus" class="vr-label">Status</label>
             <select id="listingStatus" name="status" class="vr-input" required>
@@ -294,7 +388,8 @@
               <option value="inactive">Inactive</option>
             </select>
           </div>
-
+    
+          <!-- Modal Footer -->
           <div class="vr-modal__footer">
             <button
               type="button"
